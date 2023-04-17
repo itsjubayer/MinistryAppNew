@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Ministry.Models.FileCategoryVM>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = @localizer["Index"];
+}
+
+<h4>@localizer["Create File Category"]</h4>
+
+<div class="form-group col-md-6">
+    <a asp-action="Index" asp-controller="FileModel" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Dashboard"]</a>
+</div>
+
+
+
+
+<table class="table table-hover" id="datatable">
+    <thead>
+        <tr style="background-color: #f7ecfd">
+            <th>
+                @localizer["Sl"].
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileCategoryName)
+            </th>            
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i>@localizer["Create New"]</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int rowNo = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@{rowNo++;} @rowNo</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileCategoryName)
+                </td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#datatable").DataTable();
+        }
+        )
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿ <!-- After installing new Application -->
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>TechTrioz Home List</h1>
+<hr />
+
+<table class="table table-hover" id="flatdatatable">
+    <thead>
+        <tr style="background-color: #f7ecfd">
+            <th>
+                SL.
+            </th>
+            <th>
+                URL
+            </th>
+        </tr>
+
+    </thead>
+
+    
+
+    <tbody>
+        @{ int rowNo = 0; }
+
+        <tr>
+            <td>
+                1.
+            </td>
+            <td>
+                @*<a asp-controller="Administration" asp-action="ListRoles"> Create Roles </a>*@
+                <a asp-controller="Account" asp-action="SuperUserRegister"> Create Users </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                2.
+            </td>
+            <td>
+                @*<a asp-controller="Company" asp-action="Index"> Create Apartment </a>*@
+                <a asp-controller="Administration" asp-action="ListUsers"> List Users </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                3.
+            </td>
+            <td>
+                @*<a asp-controller="Account" asp-action="SuperUserRegister"> Create Apartment Super User </a>*@
+                <a asp-controller="Administration" asp-action="ListRoles"> Roles </a>
+            </td>
+        </tr>
+        @*<tr>
+                <td>
+                    4.
+                </td>
+                <td>
+                    <a asp-controller="Administration" asp-action="ListUsersDev"> Assign roles to Users </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    5.
+                </td>
+                <td>
+                    <a asp-controller="Support" asp-action="index"> Create Support Providers </a>
+                </td>
+            </tr>
+
+        </tbody>*@
+</table>
+
+
+    @*<li class="dropdown">
+        <a href="#"><span>Manage</span> <i class="bi bi-chevron-down"></i></a>
+        <ul>
+            <li><a asp-controller="Administration" asp-action="ListUsersDev"> Super Users </a></li>
+
+            <li><a asp-controller="Account" asp-action="SuperUserRegister"> Create Apartment Super User </a></li>
+            <li><a asp-controller="Administration" asp-action="ListRoles"> Roles </a></li>
+            <li><a asp-controller="Company" asp-action="Index"> Create Apartment </a></li>
+        </ul>
+    </li>*@

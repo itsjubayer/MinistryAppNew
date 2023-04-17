@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ApplicationUser>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewBag.Title = @localizer["All Users"];
+}
+
+<h1>@localizer["All Users"]</h1>
+
+<hr />
+<div class="form-group col-md-6">
+    <a asp-action="InstallNibash" asp-controller="Administration" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Menu</a>
+</div>
+
+
+
+@if (Model.Any())
+{
+    <table class="table table-hover" id="flatdatatable">
+        <thead>
+            <tr style="background-color: #f7ecfd">
+                <th>
+                    @localizer["Sl"].
+                </th>
+                <th>
+                    <label>@localizer["Name"]</label>
+                </th>
+                <th>
+                    <label>@localizer["UserName"]</label>
+                </th>
+
+                <th>
+                    @localizer["Active"]
+                </th>
+
+                <th>
+                    <a asp-action="Register" asp-controller="Account"
+                       class="btn btn-outline-success" style="width:auto">
+                        <i class="far fa-plus-square"></i>@localizer["Add Chamber"]
+                    </a>
+
+                    <a asp-action="SuperUserRegister" asp-controller="Account"
+                       class="btn btn-outline-success" style="width:auto">
+                        <i class="far fa-plus-square"></i>@localizer["Add Admin"]
+                    </a>
+
+
+                    @*btn btn-primary mb-3 <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i>@localizer["Create New"]</a>*@
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0; }
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@{rowNo++;} @rowNo</td>
+                    <td>
+                        <img src="~/ProfilePicture/@user.ProfilePicture" title="@user.FirstName @user.LastName"
+                             class="rounded-circle"
+                             height="40" width="40"
+                             asp-append-version="true" />
+
+                        @user.FirstName &nbsp; @user.LastName
+                    </td>
+                    <td>
+                        @user.UserName
+                    </td>
+
+                    <td>
+                        @(user.IsActive ? "Yes":"No")
+
+                    </td>
+
+
+                    <td>
+                        <form method="post" asp-action="DeleteUser" asp-route-id="@user.Id">
+                            <a asp-controller="Administration" asp-action="Edituser"
+                               asp-route-id="@user.Id" class="btn btn-primary">@localizer["Edit"]</a>
+
+                            <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                                <span>@localizer["Are you sure you want to delete"]?</span>
+                                <button type="submit" class="btn btn-danger">@localizer["Yes"]</button>
+                                <a href="#" class="btn btn-primary"
+                                   onclick="confirmDelete('@user.Id', false)">@localizer["No"]</a>
+                            </span>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            @localizer["No users created yet"]
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                @localizer["Use the button below to create a user"]
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Account" asp-action="Register">
+                @localizer["Add new user"]
+            </a>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#flatdatatable").DataTable();
+        }
+        )
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Ministry.Models.FAQVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>FAQ List</h1>
+<hr />
+<div class="form-group col-md-6">
+    <a asp-action="Index" asp-controller="FAQ" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Dashboard</a>
+</div>
+
+
+<br />
+<table class="table table-hover" id="flatdatatable">
+    <thead>
+        <tr style="background-color: #f7ecfd">
+            <th>
+                @Html.DisplayNameFor(model => model.FaqTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FaqDescription)
+            </th>
+            <th>
+
+                <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa fa-plus-square"></i>Create FAQ</a>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaqTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaqDescription)
+                </td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#flatdatatable").DataTable();
+        }
+        )
+    </script>
+}

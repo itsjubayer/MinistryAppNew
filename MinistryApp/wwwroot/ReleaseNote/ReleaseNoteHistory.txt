@@ -1,0 +1,28 @@
+
+
+Configure New Apartment 
+Login to TTZ User
+Then Go to console/setting/setup etc
+
+update cube database and code Released 11.15.2022
+add new field  IsRealFlatOwner to aspNetUsers table --- Release 30.10.2022
+ALTER TABLE dbo.AspNetUsers ADD IsRealFlatOwner bit NOT NULL DEFAULT 0
+update IsRealFlatOwner to true/false
+
+
+add new field to tblRent
+	- DueDate
+	- PaymentDate
+
+ALTER TABLE tblRent ALTER COLUMN FlatOwner VARCHAR (250)
+
+change size of properties of tblRent
+	- TenantID varchar(250)
+	- FlatOwner varchar(250)
+
+add new field to tblResolution
+-MeetingLink varchar(250)
+
+ALTER TABLE dbo.AspNetUsers ADD IsRealFlatOwner bit NOT NULL DEFAULT 0
+ALTER TABLE tblRent ALTER COLUMN TenantID VARCHAR (250)
+ALTER TABLE dbo.tblResolution ADD MeetingLink varchar(250)

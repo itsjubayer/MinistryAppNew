@@ -1,0 +1,125 @@
+﻿@model Ministry.Models.FileModelVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+                <form asp-action="AddOrEdit" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Attachment)
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="FileCategory" class="control-label"></label>
+
+                            @Html.TextBoxFor(model => model.FileCategory, new { @placeholder = "FileCategory", @class = "cCode form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="DateLine" class="control-label"></label>
+
+                            @Html.TextBoxFor(model => model.DateLine, new { @placeholder = "DateLine", @class = "cCode form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="SubmitStatus" class="control-label"></label>
+
+                            @Html.TextBoxFor(model => model.SubmitStatus, new { @placeholder = "SubmitStatus", @class = "cCode form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="CreatedBy" class="control-label"></label>
+
+                            @Html.TextBoxFor(model => model.CreatedBy, new { @placeholder = "CreatedBy", @class = "cCode form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12" style="vertical-align:bottom">
+                            @Html.LabelFor(model => model.Attachment, new { @class = "attachment" })
+                            
+                            <div id="fileContent" style="display:block;" class="form-group col-md-12">
+                                @if (Model.Attachment != null && Model.Attachment != "")
+                                {
+                                    <div class="col-md-6" id="fileExist">
+                                        @Html.LabelFor(model => model.Attachment, new { @class = "FileUpload" })
+                                        @Html.HiddenFor(model => model.Attachment);
+                                        <div class="col-md-6">
+                                            <a class="" target="_blank" href="~/Files/@Model.Attachment">
+                                                <img class="attachment" src="~/assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
+                                            </a>
+
+                                            <span onclick="FileDeleteThis(this);" data-id="@Model.Id" data-table="501" data-field="Attachment" data-url="@Model.Attachment">
+                                                <img class="attachment" src="~/assets/img/document_delete.png" width="30" alt="File" title="File" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+
+                                    </div>
+
+
+                                    try
+                                    {
+
+                                    }
+                                    catch
+                                    {
+                                        <span>File exists but Not Found...</span>
+                                    }
+
+
+
+
+
+                                }
+                                else
+                                {
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+
+            <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+}

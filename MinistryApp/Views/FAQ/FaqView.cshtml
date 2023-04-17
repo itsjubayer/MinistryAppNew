@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Ministry.Models.FAQVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>FAQ List</h1>
+<hr />
+@*<div class="col-md-4">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+
+@*<tr><td colspan="3" align="center">Frequently Ask Questions</td></tr>*@
+<table class="table table-hover" id="flatdatatable">
+
+    <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+    <tbody>
+        @{ int rowNo = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@{rowNo++;} @rowNo </td>
+                <td>Q</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaqTitle)
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>A</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaqDescription)
+                </td>
+            </tr>
+            <tr style="border-bottom:dashed">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#flatdatatable").DataTable();
+        }
+        )
+    </script>*@
+}

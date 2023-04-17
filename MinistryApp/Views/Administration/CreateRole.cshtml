@@ -1,0 +1,46 @@
+﻿@model MinistryApp.ViewModel.CreateRoleViewModel
+@{
+    ViewBag.Title = "Role";
+}
+
+
+<a class="btn btn-primary" style="width:auto"
+   asp-controller="administration" asp-action="InstallNibash">
+    System Admin
+</a>
+
+
+<h1>Add Role</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName"></label>
+
+
+                <select class="form-control" id="RoleName" name="RoleName">
+                    <option value="">Select Role</option>
+                    <option value="Admin">Admin</option>
+                    @*<option value="Supervisor">Supervisor</option>*@
+                    <option value="FlatOwner">Flat Owner</option>
+                    <option value="Treasurer">Treasurer</option>
+                    <option value="Committee">Committee</option>
+                </select>
+
+
+
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:auto">Create Role</button>
+        </form>
+
+    </div>
+
+
+
+
+</div>
+

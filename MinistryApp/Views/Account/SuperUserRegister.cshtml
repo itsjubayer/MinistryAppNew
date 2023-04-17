@@ -1,0 +1,123 @@
+﻿@model MinistryApp.ViewModel.RegisterViewModel
+@{
+    ViewBag.Title = "User Register";
+}
+
+
+<h1>Create User</h1>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.IsActive)
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+
+
+                    @if (@Model != null)
+                    {
+                        @Html.HiddenFor(model => model.ProfilePicture);
+                        <img id="blah" src="~/ProfilePicture/@Model.ProfilePicture" alt="@Model.FirstName" asp-append-version="true" height="150" width="150" class="img-thumbnail">
+                    }
+                    else if (@Model == null)
+                    {
+                        <img id="blah" src="~/ProfilePicture/no_picture.png" alt="Image" asp-append-version="true" height="150" width="150" class="img-thumbnail" />
+                    }
+                    else
+                    {
+                        <img id="blah" src="~/assets/ProfilePicture/no_picture.png" alt="Image" asp-append-version="true" height="150" width="150" class="img-thumbnail" />
+                    }
+                    <br />
+                    <input type="file" name="uploadFile" onchange="readURL(this);" accept="image/*" class="form-control" />
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Mobile"></label>
+                <input asp-for="Mobile" class="form-control" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+                @*@Html.ValidationMessageFor(model => model.Mobile)*@
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DOB"></label>
+                <input asp-for="DOB" id="datepicker" type="text" class="form-control" value="@DateTime.Now.ToString("MM-dd-yyyy")" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NID"></label>
+                <input asp-for="NID" class="form-control" />
+                <span asp-validation-for="NID" class="text-danger"></span>
+                @*@Html.ValidationMessageFor(model => model.NID)*@
+            </div>
+            <div class="form-group">
+                <label asp-for="ETIN"></label>
+                <input asp-for="ETIN" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PassportNo"></label>
+                <input asp-for="PassportNo" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Per_Address"></label>
+                <input asp-for="Per_Address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="pre_Address"></label>
+                <input asp-for="pre_Address" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model Ministry.Models.FAQVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create FAQ</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            @Html.HiddenFor(m => m.EntryBy, new { Value = "@User.Identity.Name" })
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="FaqTitle" class="control-label"></label>
+
+                    @Html.TextBoxFor(m => m.FaqTitle, new { placeholder = "Faq Title", @class = " cFaqTitle form-control" })
+                    @Html.ValidationMessageFor(model => model.FaqTitle)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="FaqDescription" class="control-label"></label>
+                    @Html.TextAreaFor(m => m.FaqDescription, new { placeholder = "FaqDescription", @class = " cFaqDescription form-control" })
+                    <span asp-validation-for="FaqDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
+                </div>
+            </div>
+
+
+
+
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
