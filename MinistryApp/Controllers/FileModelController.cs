@@ -26,10 +26,23 @@ namespace Ministry.Controllers
         }
 
         // GET: Flat
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+        // GET: Flat
+        public async Task<IActionResult> ListFilesRows()
         {
             return View(await _context.FilesList.Where(p => p.IsActive == true).ToListAsync());
         }
+
+        public IActionResult OpenDummyData()
+        {
+            return View();
+        }
+
 
         // GET: EnumValues/Create
         public IActionResult AddOrEdit(int id = 0)

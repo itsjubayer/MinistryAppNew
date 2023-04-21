@@ -36,8 +36,8 @@ namespace Ministry.Models
         [Column(TypeName = "nvarchar(250)")]
         public string? FileCategory { get; set; }
 
-        [Required(ErrorMessage = "Dateline field is required.")]
-        [DisplayName("Date line")]
+        [Required(ErrorMessage = "Deadline field is required.")]
+        [DisplayName("Deadline")]
         [Column(TypeName = "DateTime")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateLine { get; set; }

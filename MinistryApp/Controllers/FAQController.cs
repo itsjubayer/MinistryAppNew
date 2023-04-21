@@ -24,6 +24,11 @@ namespace MinistryApp.Controllers
             return View(await _context.Faqs.ToListAsync());
         }
 
+        public async Task<IActionResult> ViewFAQ()
+        {
+            return View(await _context.Faqs.ToListAsync());
+        }
+
         // GET: Flat/Create
         public IActionResult AddOrEdit(int id = 0)
         {

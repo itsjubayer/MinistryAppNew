@@ -60,11 +60,11 @@
                                         @Html.HiddenFor(model => model.Attachment);
                                         <div class="col-md-6">
                                             <a class="" target="_blank" href="~/Files/@Model.Attachment">
-                                                <img class="attachment" src="~/assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
+                                                <img class="attachment" src="~/../assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
                                             </a>
 
                                             <span onclick="FileDeleteThis(this);" data-id="@Model.Id" data-table="501" data-field="Attachment" data-url="@Model.Attachment">
-                                                <img class="attachment" src="~/assets/img/document_delete.png" width="30" alt="File" title="File" />
+                                                <img class="attachment" src="~/../assets/img/document_delete.png" width="30" alt="File" title="File" />
                                             </span>
                                         </div>
                                     </div>

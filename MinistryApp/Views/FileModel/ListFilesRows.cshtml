@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Ministry.Models.FileModelVM>
+
+@{
+    ViewData["Title"] = "List";
+}
+<style>
+    .red {
+        background-color: red;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .yellow {
+        background-color: yellow;
+    }
+</style>
+
+<h1>List</h1>
+<hr />
+<a class="btn btn-primary" style="width:auto"
+   asp-controller="FAQ" asp-action="index">
+    FAQ
+</a>
+
+<a class="btn btn-primary" style="width:auto"
+   asp-controller="FileCategory" asp-action="index">
+    Category
+</a>
+
+<a asp-action="Register" asp-controller="Account"
+   class="btn btn-outline-success" style="width:auto">
+    <i class="far fa-plus-square"></i>Add Chamber
+</a>
+
+<a asp-action="SuperUserRegister" asp-controller="Account"
+   class="btn btn-outline-success" style="width:auto">
+    <i class="far fa-plus-square"></i>Add Admin
+</a>
+
+
+<br />
+<table class="table table-hover" id="filedatatable">
+    <thead>
+        <tr style="background-color: #f7ecfd">
+            <th>
+                SL.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResonsiblePerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmitStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateLine)
+            </th>
+            <th>
+                Download
+            </th>
+            <th>
+
+                <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa fa-plus-square"></i>New</a>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int rowNo = 0; }
+        @foreach (var item in Model)
+        {
+            var rowColor = "";
+            if (item.SubmitStatus == "Submitted")
+            {
+                rowColor = "#7ff748";
+            }
+            else if (item.SubmitStatus == "Pending")
+            {
+                rowColor = "#fcda5d";
+            }
+
+            if (item.SubmitStatus == "Pending" && item.DateLine <= DateTime.Now)
+            {
+                rowColor = "#fa5c6a";
+            }
+
+
+
+            <tr style="background-color:@rowColor">
+                <td>
+                    @{rowNo++;} @rowNo
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResonsiblePerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubmitStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateLine)
+                </td>
+                <td>
+                    @if (item.Attachment != null && item.Attachment != "")
+                    {
+                        try
+                        {
+                            <div class="col-md-6" id="fileExist">
+                                @*@Html.LabelFor(model => item.Attachment, new { @class = "FileUpload" })*@
+                                @Html.HiddenFor(model => item.Attachment)
+                                <div class="col-md-6">
+                                    <a class="" target="_blank" href="~/Files/@item.Attachment">
+                                        <img class="attachment" src="~/../assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
+                                    </a>
+                                </div>
+                            </div>
+
+                        }
+                        catch
+                        {
+                            <span>File exists but Not Found...</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>File Not Found...</span>
+                    }
+
+
+                    @*<a asp-action="DownloadFile" asp-route-filePath="@item.FilePath">Download</a>*@
+                </td>
+                <td>
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @*<a asp-action="AddOrEdit" asp-route-id="@item.Id"><i class="fas fa-marker fa-lg"></i></a>*@
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash-alt fa-lg"></i></a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#filedatatable").DataTable();
+        }
+        )
+    </script>
+}

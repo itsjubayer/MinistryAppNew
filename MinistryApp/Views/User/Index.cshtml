@@ -7,7 +7,19 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .red {
+        background-color: red;
+    }
 
+    .green {
+        background-color: green;
+    }
+
+    .yellow {
+        background-color: yellow;
+    }
+</style>
 <h1>List</h1>
 <hr />
 
@@ -38,6 +50,23 @@
         @{ int rowNo = 0; }
         @foreach (var item in Model)
         {
+
+            var rowColor = "";
+            if (item.SubmitStatus == "Submitted")
+            {
+                rowColor = "green";
+            }
+            else if (item.SubmitStatus == "Pending")
+            {
+                rowColor = "yellow";
+            }
+
+            if (item.SubmitStatus == "Pending" && item.DateLine <= DateTime.Now)
+            {
+                rowColor = "red";
+            }
+
+
             <tr>
                 <td>
                     @{rowNo++;} @rowNo
@@ -48,8 +77,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ResonsiblePerson)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubmitStatus)
+                <td style="background-color:@rowColor">
+                    <span style="color:white"> @Html.DisplayFor(modelItem => item.SubmitStatus) </span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateLine)

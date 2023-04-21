@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Ministry.Models.FAQVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Frequently Ask Question</h1>
+
+@foreach (var item in Model)
+{
+<table>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FaqTitle)
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FaqDescription)
+        </td>
+    </tr>
+</table>
+}
