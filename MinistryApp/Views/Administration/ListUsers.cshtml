@@ -3,113 +3,372 @@
 @{
     ViewBag.Title = @localizer["All Users"];
 }
-
-<h1>@localizer["All Users"]</h1>
-
-<hr />
-<div class="form-group col-md-6">
-    <a asp-action="InstallNibash" asp-controller="Administration" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Menu</a>
-</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-
-@if (Model.Any())
-{
-    <table class="table table-hover" id="flatdatatable">
-        <thead>
-            <tr style="background-color: #f7ecfd">
-                <th>
-                    @localizer["Sl"].
-                </th>
-                <th>
-                    <label>@localizer["Name"]</label>
-                </th>
-                <th>
-                    <label>@localizer["UserName"]</label>
-                </th>
-
-                <th>
-                    @localizer["Active"]
-                </th>
-
-                <th>
-                    <a asp-action="Register" asp-controller="Account"
-                       class="btn btn-outline-success" style="width:auto">
-                        <i class="far fa-plus-square"></i>@localizer["Add Chamber"]
-                    </a>
-
-                    <a asp-action="SuperUserRegister" asp-controller="Account"
-                       class="btn btn-outline-success" style="width:auto">
-                        <i class="far fa-plus-square"></i>@localizer["Add Admin"]
-                    </a>
+<style>
 
 
-                    @*btn btn-primary mb-3 <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i>@localizer["Create New"]</a>*@
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ int rowNo = 0; }
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@{rowNo++;} @rowNo</td>
-                    <td>
-                        <img src="~/ProfilePicture/@user.ProfilePicture" title="@user.FirstName @user.LastName"
-                             class="rounded-circle"
-                             height="40" width="40"
-                             asp-append-version="true" />
+    /* USER LIST TABLE */
+    section {
+        width: 90vw;
+        padding: 20px 0 !important;
+    }
 
-                        @user.FirstName &nbsp; @user.LastName
-                    </td>
-                    <td>
-                        @user.UserName
-                    </td>
+    .user-list tbody td > img {
+        position: relative;
+        max-width: 50px;
+        float: left;
+        margin-right: 15px;
+    }
 
-                    <td>
-                        @(user.IsActive ? "Yes":"No")
+    .user-list tbody td .user-link {
+        display: block;
+        font-size: 1.25em;
+        padding-top: 3px;
+        margin-left: 60px;
+    }
 
-                    </td>
+    .user-list tbody td .user-subhead {
+        font-size: 0.875em;
+        font-style: italic;
+    }
 
+    /* TABLES */
+    .table {
+        border-collapse: separate;
+    }
 
-                    <td>
-                        <form method="post" asp-action="DeleteUser" asp-route-id="@user.Id">
-                            <a asp-controller="Administration" asp-action="Edituser"
-                               asp-route-id="@user.Id" class="btn btn-primary">@localizer["Edit"]</a>
+    .table-hover > tbody > tr:hover > td,
+    .table-hover > tbody > tr:hover > th {
+        background-color: #eee;
+    }
 
-                            <span id="confirmDeleteSpan_@user.Id" style="display:none">
-                                <span>@localizer["Are you sure you want to delete"]?</span>
-                                <button type="submit" class="btn btn-danger">@localizer["Yes"]</button>
-                                <a href="#" class="btn btn-primary"
-                                   onclick="confirmDelete('@user.Id', false)">@localizer["No"]</a>
-                            </span>
-                        </form>
-                    </td>
-                </tr>
+    .table thead > tr > th {
+        border-bottom: 1px solid #C2C2C2;
+        padding-bottom: 0;
+    }
+
+    .table tbody > tr > td {
+        font-size: 0.875em;
+        background: #f5f5f5;
+        border-top: 10px solid #fff;
+        vertical-align: middle;
+        padding: 12px 8px;
+    }
+
+        .table tbody > tr > td:first-child,
+        .table thead > tr > th:first-child {
+            padding-left: 20px;
+        }
+
+    .table thead > tr > th span {
+        border-bottom: 2px solid #C2C2C2;
+        display: inline-block;
+        padding: 0 5px;
+        padding-bottom: 5px;
+        font-weight: normal;
+    }
+
+    .table thead > tr > th > a span {
+        color: #344644;
+    }
+
+        .table thead > tr > th > a span:after {
+            content: "\f0dc";
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: inherit;
+            margin-left: 5px;
+            font-size: 0.75em;
+        }
+
+    .table thead > tr > th > a.asc span:after {
+        content: "\f0dd";
+    }
+
+    .table thead > tr > th > a.desc span:after {
+        content: "\f0de";
+    }
+
+    .table thead > tr > th > a:hover span {
+        text-decoration: none;
+        color: #2bb6a3;
+        border-color: #2bb6a3;
+    }
+
+    .table.table-hover tbody > tr > td {
+        -webkit-transition: background-color 0.15s ease-in-out 0s;
+        transition: background-color 0.15s ease-in-out 0s;
+    }
+
+    .table tbody tr td .call-type {
+        display: block;
+        font-size: 0.75em;
+        text-align: center;
+    }
+
+    .table tbody tr td .first-line {
+        line-height: 1.5;
+        font-weight: 400;
+        font-size: 1.125em;
+    }
+
+        .table tbody tr td .first-line span {
+            font-size: 0.875em;
+            color: #969696;
+            font-weight: 300;
+        }
+
+    .table tbody tr td .second-line {
+        font-size: 0.875em;
+        line-height: 1.2;
+    }
+
+    .table a.table-link {
+        margin: 0 5px;
+        font-size: 1.125em;
+    }
+
+        .table a.table-link:hover {
+            text-decoration: none;
+            color: #2aa493;
+        }
+
+        .table a.table-link.danger {
+            color: #fe635f;
+        }
+
+            .table a.table-link.danger:hover {
+                color: #dd504c;
             }
-        </tbody>
-    </table>
+
+    .table-products tbody > tr > td {
+        background: none;
+        border: none;
+        border-bottom: 1px solid #ebebeb;
+        -webkit-transition: background-color 0.15s ease-in-out 0s;
+        transition: background-color 0.15s ease-in-out 0s;
+        position: relative;
+    }
+
+    .table-products tbody > tr:hover > td {
+        text-decoration: none;
+        background-color: #f6f6f6;
+    }
+
+    .table-products .name {
+        display: block;
+        font-weight: 600;
+        padding-bottom: 7px;
+    }
+
+    .table-products .price {
+        display: block;
+        text-decoration: none;
+        width: 50%;
+        float: left;
+        font-size: 0.875em;
+    }
+
+        .table-products .price > i {
+            color: #8dc859;
+        }
+
+    .table-products .warranty {
+        display: block;
+        text-decoration: none;
+        width: 50%;
+        float: left;
+        font-size: 0.875em;
+    }
+
+        .table-products .warranty > i {
+            color: #f1c40f;
+        }
+
+    .table tbody > tr.table-line-fb > td {
+        background-color: #9daccb;
+        color: #262525;
+    }
+
+    .table tbody > tr.table-line-twitter > td {
+        background-color: #9fccff;
+        color: #262525;
+    }
+
+    .table tbody > tr.table-line-plus > td {
+        background-color: #eea59c;
+        color: #262525;
+    }
+
+    .table-stats .status-social-icon {
+        font-size: 1.9em;
+        vertical-align: bottom;
+    }
+
+    .table-stats .table-line-fb .status-social-icon {
+        color: #556484;
+    }
+
+    .table-stats .table-line-twitter .status-social-icon {
+        color: #5885b8;
+    }
+
+    .table-stats .table-line-plus .status-social-icon {
+        color: #a75d54;
+    }
+</style>
 
 
 
-}
-else
-{
-    <div class="card">
-        <div class="card-header">
-            @localizer["No users created yet"]
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">
-                @localizer["Use the button below to create a user"]
-            </h5>
-            <a class="btn btn-primary" style="width:auto"
-               asp-controller="Account" asp-action="Register">
-                @localizer["Add new user"]
+<section>
+    <div class="main-box clearfix">
+
+
+
+        <h1>@localizer["All Users"]</h1>
+
+        <hr />
+        
+
+
+
+
+
+        <div class="table-responsive">
+            <a asp-action="ChamberRegister" asp-controller="Account"
+               class="btn btn-outline-success" style="width:auto">
+                <i class="far fa-plus-square"></i>@localizer["Add Chamber"]
             </a>
+
+            <a asp-action="SuperUserRegister" asp-controller="Account"
+               class="btn btn-outline-success" style="width:auto">
+                <i class="far fa-plus-square"></i>@localizer["Add Admin"]
+            </a>
+
+            @if (Model.Any())
+            {
+
+
+                <table class="table user-list" id="flatdatatable">
+                    <thead>
+                        <tr>
+                            <th><span>SL.</span></th>
+                            <th><span>User</span></th>
+                            <th><span>Created</span></th>
+                            <th class="text-center"><span>Status</span></th>
+                            <th><span>Email</span></th>
+                            <th class="text-center"><span>Action</span></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int rowNo = 0; }
+                        @foreach (var user in Model)
+                        {
+
+
+                            <tr>
+                                <td style="width: 2%;">@{rowNo++;} @rowNo</td>
+                                <td>
+
+                                    <img src="~/ProfilePicture/@user.ProfilePicture" title="@user.FirstName @user.LastName" />
+                                    @*class="rounded-circle"*@
+
+                                    <a href="#" class="user-link">@user.FirstName &nbsp; @user.LastName</a>
+                                    <span class="user-subhead">@user.UserRole</span>
+                                </td>
+                                <td>
+                                    @user.CreateDate
+                                </td>
+                                <td class="text-center">
+                                    @{
+                                        var styl = "";
+                                        var ActInAct = "";
+                                    }
+                                    @if (user.IsActive == true)
+                                    {
+                                        styl = "btn btn-info";
+                                        ActInAct = "Active";
+                                    }
+                                    else
+                                    {
+                                        styl = " btn btn-danger";
+                                        ActInAct = "InActive";
+                                    }
+
+
+
+                                    <span class="@styl">   @ActInAct </span>
+                                </td>
+                                <td>
+                                    <a href="#">@user.UserName</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="table-link danger">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+
+
+
+
+
+
+
+
+                        }
+                    </tbody>
+                </table>
+
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-header">
+                        @localizer["No users created yet"]
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @localizer["Use the button below to create a user"]
+                        </h5>
+                        <a class="btn btn-primary" style="width:auto"
+                           asp-controller="Account" asp-action="Register">
+                            @localizer["Add new user"]
+                        </a>
+                    </div>
+                </div>
+            }
+
         </div>
+
+
+
+
+
     </div>
-}
+</section>
+
+
 
 @section Scripts{
     <script src="~/js/CustomScript.js"></script>

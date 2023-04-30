@@ -26,6 +26,40 @@ namespace MinistryApp.ViewModel
         [Display(Name ="Confirm password")]
         [Compare("Password", ErrorMessage ="Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        /// <summary>
+        /// Create Chamber
+        /// </summary>
+        public string ChamberName { get; set; } = string.Empty;
+        public string TypesOfChambers { get; set; } = string.Empty;
+        public string ChamberNo { get; set; } = string.Empty;
+        public string Thana { get; set; } = string.Empty;
+        public string Upzila { get; set; } = string.Empty;
+        public string District { get; set; } = string.Empty;
+        public string Division { get; set; } = string.Empty;
+        public string PostalCode { get; set; } = string.Empty;
+        public string LicenseNo { get; set; } = string.Empty;
+
+        [DisplayName("License Issue Date")]
+        [Column(TypeName = "DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime LicenseIssuedate { get; set; } = DateTime.Now;
+        
+
+        [DisplayName("License Revoke Date")]
+        [Column(TypeName = "DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime LicenseRevokeDate { get; set; } = DateTime.Now;
+        
+        public string LicenseStatus { get; set; } = string.Empty;
+        public string Remarks { get; set; } = string.Empty;
+        public string LicenseAttachment { get; set; } = string.Empty;
+        /// <summary>
+        /// End Create Chamber
+        /// </summary>
+
+
         public string City { get; set; }
 
         [DisplayName("First Name *")]
@@ -79,36 +113,16 @@ namespace MinistryApp.ViewModel
         [Column(TypeName = "nvarchar(250)")]
         public string pre_Address { get; set; }
 
-        [DisplayName("Flat No")]
-        [Column(TypeName = "nvarchar(250)")]
-        [Required(ErrorMessage = "You must select a flat")]
-        public string Flat_No { get; set; }
-
+        
         [DisplayName("User Role")]
         [Column(TypeName = "nvarchar(250)")]
         public string UserRole { get; set; }
 
-        [DisplayName("Apartment")]
-        [Column(TypeName = "nvarchar(250)")]
-        public string ApartmentList { get; set; }
+        
 
-        public string TenantValue { get; set; }
-
-        [DisplayName("Type")]
-        public bool Tenant { get; set; }
-
-        [DisplayName("Flat Owner")] 
-        public string FlatOwner { get; set; }
-
-        /// <summary>
-        /// Only using in view, no need to save in database
-        /// </summary>
-        public string RealFlatOwner { get; set; }
-        public bool IsRealFlatOwner { get; set; } = false;
-
+        
         public bool IsActive { get; set; }
-        public bool IsLiving { get; set; }
-
+        
         [DisplayName("Attachment")]
         [Column(TypeName = "nvarchar(55)")]
         public string Attachment { get; set; }
@@ -123,9 +137,6 @@ namespace MinistryApp.ViewModel
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
-
-        [DisplayName("Code")]
-        public string CodeName { get; set; }
 
     }
 }

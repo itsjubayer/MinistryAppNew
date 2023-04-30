@@ -28,11 +28,18 @@ namespace MinistryApp.Models
         //    }
         //}
 
-        public DbSet<EnumModel> EnumValues { get; set; }
+       
         public DbSet<FileModelVM> FilesList { get; set; }        
         public DbSet<FAQVM> Faqs { get; set; }
         public DbSet<FileCategoryVM> FileCategoryList { get; set; }
-        
+        public DbSet<DropDownValuesVM> DropdownValues { get; set; }
+
+
+        public DbSet<DivisionsVM> DivisionsList { get; set; }
+        public DbSet<DistrictsVM> DistrictsList { get; set; }
+        public DbSet<UpazilasVM> UpazilasList { get; set; }
+        public DbSet<UnionsVM> UnionsList { get; set; }
+
         /**
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

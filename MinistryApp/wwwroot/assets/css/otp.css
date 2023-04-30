@@ -1,0 +1,57 @@
+﻿body1 {
+    margin: 0;
+    font-family:"poppins",sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #282a36;
+    height: 65vh;
+    color: #fff;
+    align-items: center;
+}
+
+.otp-field {
+    /* display: flex; */
+    text-align: center;
+}
+.otp-field input {
+        width: 2%;
+        font-size: 16px;
+        padding: 10px 0px;
+        text-align: center;
+        border-radius: 5px;
+        margin: 0px;
+        border: 2px solid #55525c;
+        background: #21232d;
+        font-weight: bold;
+        color: #fff;
+        outline: none;
+        transition: all 0.1s;
+    }
+
+.otp-field input:focus {
+            border: 2px solid #a527ff;
+            box-shadow: 0 0 2px 2px #a527ff6a;
+        }
+
+.disabled {
+    opacity: 0.5;
+}
+
+.space {
+    margin-right: 1rem !important;
+}
+
+.btn {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 34px;
+    border: none;
+    outline: none;
+    background: #27A327;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+}

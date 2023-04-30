@@ -38,6 +38,13 @@ namespace Ministry.Controllers
             return View(await _context.FilesList.Where(p => p.IsActive == true).ToListAsync());
         }
 
+        // GET: Flat
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
+
         public IActionResult OpenDummyData()
         {
             return View();
@@ -174,10 +181,15 @@ namespace Ministry.Controllers
             return View(fileModelObj);
         }
 
+        // GET: EnumValues/Create
+        public IActionResult FileDetails(int id = 0)
+        {
+            return View();
+        }
 
 
-        // GET: Employee/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+            // GET: Employee/Delete/5
+            public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

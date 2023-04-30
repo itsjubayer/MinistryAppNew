@@ -1,0 +1,50 @@
+﻿@model Ministry.Models.DropDownValuesVM
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = @localizer["Create"];
+}
+
+<h4>@localizer["General Entry"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label class="control-label">Type</label>
+                    @*@Html.DropDownList("EnumValueType",
+        new SelectList(Enum.GetValues(typeof(EnumValueType))),
+        "Select Type",
+        new { @class = "form-control" })*@
+
+
+                    <select asp-for="EnumValueType" asp-items="ViewBag.ENUMTYPES"  class="control-label"></select>
+
+                    <span asp-validation-for="DropDownValue" class="text-danger"></span>
+                </div>
+
+                <div class="form-group  col-md-6">
+                    <label class="control-label">Value</label>
+                    @Html.TextBoxFor(m => m.DropDownText, new { @class = "form-control", @maxlength = "60" })
+                    <span asp-validation-for="DropDownText" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="@localizer["Submit"]" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Back to List"]</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Ministry.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,27 +14,55 @@ namespace MinistryApp.Models
     {
         public string City { get; set; }
        
+        /// <summary>
+        /// Create Chamber
+        /// </summary>
+        public string ChamberName { get; set; } = string.Empty;
+        public string TypesOfChambers { get; set; } = string.Empty;
+        public string ChamberNo { get; set; } = string.Empty;
+        public int Thana { get; set; }
+       // public virtual UnionsVM UnionsVM { get; set; }
+        public int Upzila { get; set; }
+        //public virtual UpazilasVM UpazilasVM { get; set; }
+
+        public int District { get; set; }
+        //public virtual DistrictsVM DistrictsVM { get; set; }
+
+        public int Division { get; set; }
+       // public virtual DivisionsVM DivisionsVM { get; set; }
+
+        public string PostalCode { get; set; } = string.Empty;
+        public string LicenseNo { get; set; } = string.Empty;
+
+        [DisplayName("License Issue Date")]
+        [Column(TypeName = "DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime LicenseIssuedate { get; set; } = DateTime.Now;
+
+
+        [DisplayName("License Revoke Date")]
+        [Column(TypeName = "DateTime")]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime LicenseRevokeDate { get; set; } = DateTime.Now;
+
+        public string LicenseStatus { get; set; } = string.Empty;
+        public string Remarks { get; set; } = string.Empty;
+        public string LicenseAttachment { get; set; } = string.Empty;
+        /// <summary>
+        /// End Create Chamber
+        /// </summary>
+        /// 
+
         public string FirstName { get; set; }
-       
         public string LastName { get; set; }
 
-
-        //[DataType(DataType.PhoneNumber)]
-        //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
-        //[RegularExpression(@"^(\d{11})$", ErrorMessage = "Not a valid phone number")]
-        [Required(ErrorMessage = "You must provide a phone number")]
         [Display(Name = "Mobile")]
         [MaxLength(20)]
         [MinLength(1)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number is not valid")]
         public string Mobile { get; set; }
-
-
         
-        //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
-        //[RegularExpression(@"^(\d{13})$", ErrorMessage = "NID is not valid")]
-        //[RegularExpression("\d*", ErrorMessage = "NID must be numeric")]
-        //[RegularExpression("^[0-9]{1,12}$", ErrorMessage = "...")]
+        
         [Display(Name = "NID")]
         [MaxLength(20)]
         [MinLength(1)]
@@ -51,12 +80,8 @@ namespace MinistryApp.Models
         public string PassportNo { get; set; }        
         public string Per_Address { get; set; }        
         public string pre_Address { get; set; }
-       
         public string UserRole { get; set; }
-
-
         public bool IsActive { get; set; }
-       
 
         [DisplayName("Attachment")]
         [Column(TypeName = "nvarchar(55)")]

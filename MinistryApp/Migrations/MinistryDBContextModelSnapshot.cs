@@ -150,6 +150,94 @@ namespace Ministry.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Ministry.Models.DistrictsVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bn_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Division_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("lon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DistrictsList");
+                });
+
+            modelBuilder.Entity("Ministry.Models.DivisionsVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("bn_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DivisionsList");
+                });
+
+            modelBuilder.Entity("Ministry.Models.DropDownValuesVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DropDownRef")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DropDownText")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DropDownText");
+
+                    b.Property<string>("DropDownValue")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DropDownValue");
+
+                    b.Property<int>("EnumValueType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DropdownValues");
+                });
+
             modelBuilder.Entity("Ministry.Models.FAQVM", b =>
                 {
                     b.Property<int>("Id")
@@ -264,6 +352,60 @@ namespace Ministry.Migrations
                     b.ToTable("tblFiles");
                 });
 
+            modelBuilder.Entity("Ministry.Models.UnionsVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bn_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("upazilla_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnionsList");
+                });
+
+            modelBuilder.Entity("Ministry.Models.UpazilasVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bn_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("district_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UpazilasList");
+                });
+
             modelBuilder.Entity("MinistryApp.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -274,6 +416,12 @@ namespace Ministry.Migrations
 
                     b.Property<string>("Attachment")
                         .HasColumnType("nvarchar(55)");
+
+                    b.Property<string>("ChamberName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChamberNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -288,6 +436,12 @@ namespace Ministry.Migrations
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("DateTime");
+
+                    b.Property<int>("District")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Division")
+                        .HasColumnType("int");
 
                     b.Property<string>("ETIN")
                         .HasColumnType("nvarchar(max)");
@@ -308,6 +462,21 @@ namespace Ministry.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LicenseAttachment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LicenseIssuedate")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("LicenseNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LicenseRevokeDate")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("LicenseStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -315,7 +484,6 @@ namespace Ministry.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -346,14 +514,29 @@ namespace Ministry.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Thana")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<string>("TypesOfChambers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Upzila")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -376,32 +559,6 @@ namespace Ministry.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("MinistryApp.Models.EnumModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApartCodeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EnumText")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("EnumValueType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tblEnum");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

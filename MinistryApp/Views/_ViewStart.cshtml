@@ -1,3 +1,34 @@
 ﻿@{
-    Layout = "_Layout";
-}
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "_LayoutDashboardAdmin";
+        }else if (User.IsInRole("Chamber"))
+        {
+            Layout = "_LayoutDashboardChamber";
+        }else
+        {
+            Layout = "_Layout";
+        }
+   }
+
+
+@*@{
+    string CurrentReq = Convert.ToString(Context.Request.HttpContext.Request.RouteValues["Controller"]);
+    dynamic Layout;
+
+
+    switch (CurrentReq)
+    {
+        case "User":
+            Layout = "~/Views/Shared/_Layout.cshtml";
+            break;
+        default:
+            //Admin layout
+            Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+            break;
+    }
+    }*@
+
+@*@{
+        Layout = "_Layout";
+    }*@

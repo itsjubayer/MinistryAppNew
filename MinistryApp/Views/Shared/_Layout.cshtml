@@ -56,15 +56,7 @@
                 <p>
 
 
-                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
-                    {
-                        <a asp-controller="FileModel" asp-action="index"><span style="color:white">Dashboard</span></a>
-                    }
-
-                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Chamber")))
-                    {
-                        <a asp-controller="User" asp-action="index"><span style="color:white">Dashboard</span></a>
-                    }
+                    
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -110,24 +102,40 @@
                     <li>
                         <a class="nav-link scrollto" asp-area="" asp-controller="About" asp-action="About">@localizer["About"]</a>
                     </li>
-                    <li><a class="nav-link scrollto" href="news.html">News & Events</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="News" asp-action="Index">News & Events</a></li>
                     <li><a class="nav-link scrollto" href="jobs.html">Jobs</a></li>
                     <li><a class="nav-link scrollto" href="elearning.html">E-learning</a></li>
                     <li><a class="nav-link scrollto" href="photo-gallery.html">Gallery</a></li>
                     <li><a class="nav-link scrollto" href="faq.html">FAQ</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="dashboard1.html">Dashboard</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    @*<li><a class="nav-link scrollto" href="dashboard1.html">Dashboard</a></li>*@
+
+                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
+                {
+                <li>
+                    <a class="nav-link scrollto" asp-controller="FileModel" asp-action="index"><span>Dashboard</span></a>
+                </li>
+                }
+
+                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Chamber")))
+                {
+                <li>
+                    <a class="nav-link scrollto" asp-controller="User" asp-action="index"><span>Dashboard</span></a>
+                </li>
+                }
+
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
         </div>

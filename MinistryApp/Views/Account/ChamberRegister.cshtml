@@ -1,0 +1,278 @@
+﻿@model MinistryApp.ViewModel.RegisterViewModel
+@{
+    ViewBag.Title = "Chamber Register";
+    var baseurl = ViewBag.BaseUrl;
+}
+
+
+<style>
+    .inputstl {
+        padding: 9px;
+        border: solid 1px #0077B0;
+        outline: 0;
+        background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF));
+        background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px);
+        box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    }
+</style>
+
+<script src="~/../lib/jquery/dist/jquery.js"></script>
+
+
+
+
+
+<section>
+    <div class="main-box clearfix">
+
+        <h1>Add Chamber</h1>
+        <div class="row">
+            <div class="col-md-7">
+                <form asp-action="ChamberRegister" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(m => m.Attachment)
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+
+                            @if (@Model != null)
+                            {
+                                @Html.HiddenFor(model => model.ProfilePicture);
+                                <img id="blah" src="~/ProfilePicture/@Model.ProfilePicture" alt="@Model.FirstName" asp-append-version="true" height="150" width="150" class="img-thumbnail">
+                            }
+                            else if (@Model == null)
+                            {
+                                <img id="blah" src="~/ProfilePicture/no_picture.png" alt="Image" asp-append-version="true" height="150" width="150" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img id="blah" src="~/../assets/ProfilePicture/no_picture.png" alt="Image" asp-append-version="true" height="150" width="150" class="img-thumbnail" />
+                            }
+                            <br />
+                            <input type="file" name="uploadFile" onchange="readURL(this);" accept="image/*" class="form-control" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input asp-for="FirstName" class="form-control inputstl" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Types Of Chambers</label>
+                        @Html.DropDownListFor(m => m.TypesOfChambers, new SelectList(ViewBag.chamberList, "Value", "Text"), "Select Chamber Type", new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chamber No</label>
+                        <input asp-for="ChamberNo" class="form-control  inputstl" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Division</label>
+                        <select asp-for="Division" class="form-control"
+                                asp-items="ViewBag.DivisionData"
+                                id="DivisionId" onchange="loadDivision(this)"></select>
+
+
+                        @*<select asp-for="Division" class="form-control" asp-items="ViewBag.ProductData" id="ddlProductId"></select>*@
+                        @*@Html.DropDownListFor(m => m.Division, new SelectList(ViewBag.divisionList, "Value", "Text"), "Select Division", new { @class = "form-control" })*@
+                        <span asp-validation-for="Division" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">District</label>
+                        <select asp-for="District" class="form-control" asp-items="ViewBag.DistrictData" id="ddlDistrictId"></select>
+
+                        @*@Html.DropDownListFor(m => m.District, new SelectList(ViewBag.districtList, "Value", "Text"), "Select District", new { @class = "form-control" })*@
+                        <span asp-validation-for="District" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Upzila</label>
+                        <select asp-for="Upzila" class="form-control" asp-items="ViewBag.UpzilaData" id="ddlUpzailaId"></select>
+
+                        @*@Html.DropDownListFor(m => m.Upzila, new SelectList(ViewBag.upzillaList, "Value", "Text"), "Select Division", new { @class = "form-control" })*@
+                        <span asp-validation-for="Upzila" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Thana</label>
+                        @*@Html.DropDownListFor(m => m.Thana, new SelectList(ViewBag.unionList, "Value", "Text"), "Select Division", new { @class = "form-control" })*@
+                        <select asp-for="Thana" class="form-control" asp-items="ViewBag.UnionData" id="ddlThanaId"></select>
+                        <span asp-validation-for="Thana" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input asp-for="PostalCode" class="form-control  inputstl" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input asp-for="Per_Address" class="form-control  inputstl" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>License No</label>
+                        <input asp-for="LicenseNo" class="form-control  inputstl" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>License Issue date</label>
+                        <input asp-for="LicenseIssuedate" id="datepickerIssuedate" type="text" class="form-control  inputstl" value="@DateTime.Now.ToString("MM-dd-yyyy")" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>License Status</label>
+                        @*<input asp-for="LicenseStatus" class="form-control  inputstl" />*@
+                        <select class="form-control" id="LicenseStatus" name="LicenseStatus">
+                            <option value="">Select Status</option>
+                            <option value="Active">Active</option>
+                            <option value="In-Active">In-Active</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>License Revoke date</label>
+                        <input asp-for="LicenseRevokeDate" id="datepickerRevokeDate" type="text" class="form-control  inputstl" value="@DateTime.Now.ToString("MM-dd-yyyy")" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>License attachment</label>
+                        <input type="file" class="form-control" name="LicenseAttachment" />
+                        @*<input asp-for="LicenseAttachment" class="form-control  inputstl" />*@
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control  inputstl" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control  inputstl" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control  inputstl" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <input asp-for="Remarks" class="form-control  inputstl" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepickerIssuedate").datepicker();
+        $("#datepickerRevokeDate").datepicker();
+                });
+    </script>
+
+    <script>
+        /*image preview*/
+        function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result);
+                        };
+
+        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var a = 0;
+        });
+    function loadDivision(obj) {
+            var value = obj.value;
+            var url = "@baseurl";
+            $.post(url + "Account/GetDistrictsByDivisionId", { divisionId: value }, function (data) {
+                debugger;
+                PopulateDistrictDropDown("#ddlDistrictId", data);
+            });
+        }
+    function PopulateDistrictDropDown(dropDownId, list, selectedId) {
+            $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select District--</option>")
+            $.each(list, function (index, row) {
+                $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+            });
+    }
+
+
+    $('#ddlDistrictId').change(function () {
+        var value = $("#ddlDistrictId").val();
+            var url = "@baseurl";
+        $.post(url + "Account/GetUpaziaByDistrictId", { districtId: value }, function (data) {
+                debugger;
+            PopulateUpzilaDropDown("#ddlUpzailaId", data);
+            });
+    });
+
+    function PopulateUpzilaDropDown(dropDownId, list, selectedId) {
+        $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select Upzila--</option>")
+        $.each(list, function (index, row) {
+            $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+        });
+    }
+
+
+        $('#ddlUpzailaId').change(function () {
+            var value = $("#ddlUpzailaId").val();
+            var url = "@baseurl";
+            $.post(url + "Account/GetUnionByUpzilaId", { upzilaId: value }, function (data) {
+                debugger;
+            PopulateThanaDropDown("#ddlThanaId", data);
+            });
+    });
+
+    function PopulateThanaDropDown(dropDownId, list, selectedId) {
+        $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select Thana--</option>")
+        $.each(list, function (index, row) {
+            $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+        });
+    }
+
+
+    </script>
+}

@@ -1,249 +1,265 @@
-﻿@model IEnumerable<Ministry.Models.FileModelVM>
-
-@{
-    ViewData["Title"] = "Index";
-}
+﻿
 <style>
-    .card {
-        background-color: #fff;
-        border-radius: 10px;
-        border: none;
-        position: relative;
-        margin-bottom: 30px;
-        box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
-    }
-
-        .card:hover {
-            background: #fff;
-            box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
-            /*-webkit-transition: all 0.2s ease-in;
-        -moz-transition: all 0.2s ease-in;
-        -ms-transition: all 0.2s ease-in;*/
-            /* -o-transition: all 0.2s ease-in;
-        transition: all 0.2s ease-in;*/
-            /* margin-top: 50px;*/
-        }
-
-
-    .l-bg-cherry {
-        background: linear-gradient(to right, #493240, #f09) !important;
-        color: #fff;
-    }
-
-    .l-bg-blue-dark {
-        background: linear-gradient(to right, #373b44, #4286f4) !important;
-        color: #fff;
-    }
-
-    .l-bg-green-dark {
-        background: linear-gradient(to right, #0a504a, #38ef7d) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange-dark {
-        background: linear-gradient(to right, #a86008, #ffba56) !important;
-        color: #fff;
-    }
-
-    .card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
-        font-size: 110px;
-    }
-
-    .card .card-statistic-3 .card-icon {
-        text-align: center;
-        line-height: 50px;
-        margin-left: 15px;
-        color: #000;
-        position: absolute;
-        right: -5px;
-        top: 20px;
-        opacity: 0.1;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
-
-    .l-bg-green {
-        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange {
-        background: linear-gradient(to right, #f9900e, #ffba56) !important;
-        color: #fff;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
     }
 </style>
 
-<h1>List</h1>
-<hr />
-<a class="btn btn-primary" style="width:auto"
-   asp-controller="FAQ" asp-action="index">
-    FAQ
-</a>
 
-<a class="btn btn-primary" style="width:auto"
-   asp-controller="FileCategory" asp-action="index">
-    Category
-</a>
+<!-- Custom styles for this template -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/sidebar.css" rel="stylesheet">
 
-<a asp-action="Register" asp-controller="Account"
-   class="btn btn-outline-success" style="width:auto">
-    <i class="far fa-plus-square"></i>Add Chamber
-</a>
-
-<a asp-action="SuperUserRegister" asp-controller="Account"
-   class="btn btn-outline-success" style="width:auto">
-    <i class="far fa-plus-square"></i>Add Admin
-</a>
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
 
 
-<br />
-<a asp-action="ListFilesRows" asp-controller="FileModel"
-   class="btn btn-outline-success" style="width:auto">
-    <i class="far fa-plus-square"></i>Files
-</a>
+    .navbar a, .navbar a:focus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 3px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #FFF;
+        white-space: nowrap;
+        transition: 0.3s;
+        position: relative;
+    }
 
-<br />
+    .green {
+        background-color: #8f9523;
+        color: #FFF;
+    }
 
-<div class="form-row">
+    .red {
+        background-color: #f36b6b;
+        color: #FFF;
+    }
 
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">metropolitan chamber of commerce and industry</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">7</h6>
-                        <p class="card-text">&nbsp</p>
-                        <a href="/FileModel/OpenDummyData" class="btn btn-primary">More</a>
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Renewal.png" class="img-fluid rounded-start" alt="Bill">*@
+    .maroon {
+        background-color: #8b4513;
+        color: #FFF;
+    }
+</style>
+
+<main>
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+
+        
+
+        @{
+            Html.RenderPartial("_LeftMenuAdmin");
+        }
+
+
+    </div>
+
+    <div class="b-example-divider"></div>
+    <!--
+      <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
+        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="visually-hidden">Icon-only</span>
+        </a>
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+          <li class="nav-item">
+            <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+              <svg class="bi" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+              <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+              <svg class="bi" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+              <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+              <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"/></svg>
+            </a>
+          </li>
+        </ul>
+        <div class="dropdown border-top">
+          <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="b-example-divider"></div>
+
+      <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-5 fw-semibold">Collapsible</span>
+        </a>
+        <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+              Home
+            </button>
+            <div class="collapse show" id="home-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">Overview</a></li>
+                <li><a href="#" class="link-dark rounded">Updates</a></li>
+                <li><a href="#" class="link-dark rounded">Reports</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              Dashboard
+            </button>
+            <div class="collapse" id="dashboard-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">Overview</a></li>
+                <li><a href="#" class="link-dark rounded">Weekly</a></li>
+                <li><a href="#" class="link-dark rounded">Monthly</a></li>
+                <li><a href="#" class="link-dark rounded">Annually</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+              Orders
+            </button>
+            <div class="collapse" id="orders-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">New</a></li>
+                <li><a href="#" class="link-dark rounded">Processed</a></li>
+                <li><a href="#" class="link-dark rounded">Shipped</a></li>
+                <li><a href="#" class="link-dark rounded">Returned</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="border-top my-3"></li>
+          <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              Account
+            </button>
+            <div class="collapse" id="account-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark rounded">New...</a></li>
+                <li><a href="#" class="link-dark rounded">Profile</a></li>
+                <li><a href="#" class="link-dark rounded">Settings</a></li>
+                <li><a href="#" class="link-dark rounded">Sign out</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="b-example-divider"></div> -->
+
+
+    <section>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" style="padding-left: 15px;">
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm green">
+
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="/FileModel/OpenDummyData"> মেট্রোপলিটন চেম্বার অফ কমার্স অ্যান্ড ইন্ডাস্ট্রি</a></h4>
+                        <h1>7</h1>
+
+
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm red">
+
+                    <div class="card-body">
+                        <h4 class="card-title">বাংলাদেশ উইমেন চেম্বার অব কমার্স অ্যান্ড ইন্ডাস্ট্রি</h4>
+                        <h1>18</h1>
 
 
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">Bangladesh Women Chamber of Commerce and Industry</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">18</h6>
-                        <p class="card-text"></p>
-                        @*<a href="/Report/Meeting?fromDate=@fromDate&toDate=@toDate" class="btn btn-primary">@localizer["Details"]</a>*@
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Meeting-2.png" class="img-fluid rounded-start" alt="Bill">*@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm maroon">
+
+                    <div class="card-body">
+                        <h4 class="card-title">জেল্লা চেম্বার অফ কমার্স ইন্ডাস্ট্রি</h4>
+                        <h1>68</h1>
 
 
-
-
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">zella chamber of commerce industry</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">68</h6>
-                        <p class="card-text">&nbsp;</p>
-                        @*<a href="/Report/PendingTask?fromDate=@fromDate&toDate=@toDate" class="btn btn-primary">@localizer["Details"]</a>*@
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Pending.png" class="img-fluid rounded-start" alt="Bill">*@
                     </div>
                 </div>
             </div>
+
+
         </div>
-    </div>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" style="padding-left: 15px;">
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm green">
+
+                    <div class="card-body">
+                        <h4 class="card-title"> জুথো চেম্বার অফ কমার্স ইন্ডাস্ট্রি</h4>
+                        <h1>36</h1>
 
 
-</div>
-
-<div class="form-row">
-
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">Joutho chamber of commerce industry</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">36</h6>
-                        <p class="card-text">&nbsp</p>
-                        @*<a href="/Report/Renewal?fromDate=s&toDate=s" class="btn btn-primary">More</a>*@
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Renewal.png" class="img-fluid rounded-start" alt="Bill">*@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm red">
+
+                    <div class="card-body">
+                        <h4 class="card-title">upozella chamber</h4>
+                        <h1>2</h1>
 
 
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">upozella chamber</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">2</h6>
-                        <p class="card-text"></p>
-                        @*<a href="/Report/Meeting?fromDate=@fromDate&toDate=@toDate" class="btn btn-primary">@localizer["Details"]</a>*@
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Meeting-2.png" class="img-fluid rounded-start" alt="Bill">*@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="col">
+                <div class="card mb-3 rounded-3 shadow-sm maroon">
+
+                    <div class="card-body">
+                        <h4 class="card-title">পেশা জীবি গ্রুপ মালিক</h4>
+                        <h1>187</h1>
 
 
-
-
-    <div class="form-group col-md-4">
-        <div class="card" style="width: auto;">
-            <div class="card-body" style="background-color: #f7ecfd">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-title">পেশা জীবি গ্রুপ মালিক</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">187</h6>
-                        <p class="card-text">&nbsp;</p>
-                        @*<a href="/Report/PendingTask?fromDate=@fromDate&toDate=@toDate" class="btn btn-primary">@localizer["Details"]</a>*@
-                    </div>
-                    <div class="col-md-4">
-                        @*<img src="~/../assets/icons/Pending.png" class="img-fluid rounded-start" alt="Bill">*@
                     </div>
                 </div>
             </div>
+
+
         </div>
-    </div>
 
 
-</div>
-
-
-
-
-
-@section Scripts
-{
-
-
-}
+    </section>
+</main>
