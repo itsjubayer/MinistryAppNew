@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinistryApp.Models;
 
 namespace Ministry.Migrations
 {
     [DbContext(typeof(MinistryDBContext))]
-    partial class MinistryDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230502102108_addTypesOfReports1")]
+    partial class addTypesOfReports1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,6 +247,9 @@ namespace Ministry.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApartCodeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("DateTime");
 
@@ -257,9 +262,6 @@ namespace Ministry.Migrations
                     b.Property<string>("FaqTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -352,80 +354,6 @@ namespace Ministry.Migrations
                     b.ToTable("tblFiles");
                 });
 
-            modelBuilder.Entity("Ministry.Models.MemberInfoVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("Alternative_Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Alternative_Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChamberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Designaion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("District")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Division")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("EntryDate")
-                        .HasColumnType("DateTime");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("DateTime");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MemberName")
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("NID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("TIN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Thana")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Tradelicense")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Upzila")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MemberInfo");
-                });
-
             modelBuilder.Entity("Ministry.Models.SubmittedFileVM", b =>
                 {
                     b.Property<int>("Id")
@@ -436,14 +364,11 @@ namespace Ministry.Migrations
                     b.Property<string>("Attachment")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ChamberPersonId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Chamber_Id")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("DateTime");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("DeadLine")
                         .HasColumnType("DateTime");
@@ -452,9 +377,11 @@ namespace Ministry.Migrations
                         .HasColumnType("DateTime");
 
                     b.Property<string>("Feedback_By")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Feedback_Note")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("File_Submit_Status")
@@ -479,10 +406,9 @@ namespace Ministry.Migrations
                     b.Property<int?>("TypesOfReportId")
                         .HasColumnType("int");
 
-                    b.Property<string>("chamber_username")
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ChamberPersonId");
 
                     b.HasIndex("TypesOfReportId");
 
@@ -500,9 +426,6 @@ namespace Ministry.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("AlertFrquency")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FreqOfReport")
                         .HasColumnType("int");
 
                     b.Property<string>("Frequency_Of_Report")
@@ -799,9 +722,15 @@ namespace Ministry.Migrations
 
             modelBuilder.Entity("Ministry.Models.SubmittedFileVM", b =>
                 {
+                    b.HasOne("MinistryApp.Models.ApplicationUser", "ChamberPerson")
+                        .WithMany()
+                        .HasForeignKey("ChamberPersonId");
+
                     b.HasOne("Ministry.Models.TypesOfReportVM", "TypesOfReport")
                         .WithMany()
                         .HasForeignKey("TypesOfReportId");
+
+                    b.Navigation("ChamberPerson");
 
                     b.Navigation("TypesOfReport");
                 });

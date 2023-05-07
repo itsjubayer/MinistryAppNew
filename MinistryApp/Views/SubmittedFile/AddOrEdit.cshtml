@@ -1,0 +1,63 @@
+﻿@model Ministry.Models.SubmittedFileVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form name="form1" asp-action="AddOrEdit" asp-controller="SubmittedFile" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Feedback_By, new { Value = "@User.Identity.Name" })
+
+            @*@Html.DropDownList("ContractVar2", new SelectList(ViewBag.contractsListSchedule, "Value", "Text"), "Select contract", new { @class = "form-control" })*@
+
+
+            @*@Html.TextArea("contract_review", null, new { @placeholder = "Remarks", @class = " cContract_review form-control" })*@
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Report Type</label>
+                    @Html.DropDownListFor(m => m.Report_Type_Id, new SelectList(ViewBag.reportTypeList, "Value", "Text"), "Select Report Type")  @*, new { @class = "form-control" }*@
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="DeadLine" class="control-label"></label>
+                    <input asp-for="DeadLine" id="datepicker" type="text" class="form-control" />
+                    <span asp-validation-for="DeadLine" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" /> @*onclick="phonenumber(document.form1.Mobile)"*@
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+}

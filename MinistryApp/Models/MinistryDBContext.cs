@@ -39,6 +39,14 @@ namespace MinistryApp.Models
         public DbSet<DistrictsVM> DistrictsList { get; set; }
         public DbSet<UpazilasVM> UpazilasList { get; set; }
         public DbSet<UnionsVM> UnionsList { get; set; }
+        public DbSet<TypesOfReportVM> TypesOfReports { get; set; }
+        public DbSet<SubmittedFileVM> SubmittedFiles { get; set; }
+        public DbSet<MemberInfoVM> MemberInfoList { get; set; }
+
+        
+
+
+
 
         /**
         protected override void OnModelCreating(ModelBuilder modelBuilder)

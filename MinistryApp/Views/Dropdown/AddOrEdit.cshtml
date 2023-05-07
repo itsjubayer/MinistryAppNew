@@ -19,9 +19,12 @@
         new SelectList(Enum.GetValues(typeof(EnumValueType))),
         "Select Type",
         new { @class = "form-control" })*@
+                    @*@Html.DropDownList("Value",
+                        new SelectList(Enum.GetValues(typeof(EnumValueType))),
+                        "Select Type",
+                        new { @class = "form-control" })*@
 
-
-                    <select asp-for="EnumValueType" asp-items="ViewBag.ENUMTYPES"  class="control-label"></select>
+                    <select asp-for="EnumValueType" asp-items="ViewBag.ENUMTYPES" class="control-label"></select>
 
                     <span asp-validation-for="DropDownValue" class="text-danger"></span>
                 </div>

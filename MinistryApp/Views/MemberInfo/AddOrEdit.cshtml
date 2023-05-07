@@ -1,0 +1,157 @@
+﻿@model Ministry.Models.MemberInfoVM
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = @localizer["Create"];
+}
+
+<h4>@localizer["General Entry"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    cHAMBER lisT
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="MemberName" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.MemberName, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="MemberName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    District, Division, Thana, Upzilla
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Country" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Address" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Status" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Status, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="PostalCode" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Tradelicense" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Tradelicense, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Tradelicense" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="NID" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.NID, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="NID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="TIN" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.TIN, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="TIN" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Phone" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Alternative_Phone" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Alternative_Phone, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Alternative_Phone" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Alternative_Email" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Alternative_Email, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Alternative_Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="ExpiryDate" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="EntryDate" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.EntryDate, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="EntryDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label asp-for="Designaion" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.Designaion, new { @class = "form-control", @maxlength = "35" })
+                    <span asp-validation-for="Designaion" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="@localizer["Submit"]" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Back to List"]</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

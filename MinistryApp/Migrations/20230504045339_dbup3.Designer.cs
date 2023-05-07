@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinistryApp.Models;
 
 namespace Ministry.Migrations
 {
     [DbContext(typeof(MinistryDBContext))]
-    partial class MinistryDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230504045339_dbup3")]
+    partial class dbup3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

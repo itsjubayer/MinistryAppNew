@@ -13,16 +13,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-row">
-                
-
                 <div class="form-group  col-md-6">
                     <label asp-for="FileCategoryName" class="control-label"></label>
                     @Html.TextBoxFor(m => m.FileCategoryName, new { @class = "form-control", @maxlength = "35" })
                     <span asp-validation-for="FileCategoryName" class="text-danger"></span>
                 </div>
-
-
-
             </div>
 
             <div class="form-row">

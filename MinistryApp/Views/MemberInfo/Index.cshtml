@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Ministry.Models.MemberInfoVM>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = @localizer["Index"];
+}
+<section>
+
+    <div class="main-box clearfix">
+        <h4>@localizer["General Entry"]</h4>
+
+        <table class="table table-hover" id="flatdatatable">
+            <thead>
+                <tr style="background-color: #f7ecfd">
+                    <th>
+                        @localizer["Sl"].
+                    </th>
+                    <th>
+                        Member Name
+                    </th>
+                    <th>
+                        Country
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i>@localizer["Create New"]</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int rowNo = 0; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@{rowNo++;} @rowNo</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</section>
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+                $(document).ready(function () {
+                    $("#flatdatatable").DataTable();
+                }
+                )
+    </script>
+}

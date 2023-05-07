@@ -98,7 +98,8 @@ namespace MinistryApp.Models
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
-
+        //[DisplayName("Active")]
+        //public bool IsActive { get; set; }
 
     }
 }

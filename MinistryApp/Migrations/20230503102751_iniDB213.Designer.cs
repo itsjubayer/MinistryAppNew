@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinistryApp.Models;
 
 namespace Ministry.Migrations
 {
     [DbContext(typeof(MinistryDBContext))]
-    partial class MinistryDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230503102751_iniDB213")]
+    partial class iniDB213
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -436,14 +438,11 @@ namespace Ministry.Migrations
                     b.Property<string>("Attachment")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ChamberPersonId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Chamber_Id")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("DateTime");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("DeadLine")
                         .HasColumnType("DateTime");
@@ -452,9 +451,11 @@ namespace Ministry.Migrations
                         .HasColumnType("DateTime");
 
                     b.Property<string>("Feedback_By")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Feedback_Note")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("File_Submit_Status")
@@ -479,10 +480,9 @@ namespace Ministry.Migrations
                     b.Property<int?>("TypesOfReportId")
                         .HasColumnType("int");
 
-                    b.Property<string>("chamber_username")
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ChamberPersonId");
 
                     b.HasIndex("TypesOfReportId");
 
@@ -799,9 +799,15 @@ namespace Ministry.Migrations
 
             modelBuilder.Entity("Ministry.Models.SubmittedFileVM", b =>
                 {
+                    b.HasOne("MinistryApp.Models.ApplicationUser", "ChamberPerson")
+                        .WithMany()
+                        .HasForeignKey("ChamberPersonId");
+
                     b.HasOne("Ministry.Models.TypesOfReportVM", "TypesOfReport")
                         .WithMany()
                         .HasForeignKey("TypesOfReportId");
+
+                    b.Navigation("ChamberPerson");
 
                     b.Navigation("TypesOfReport");
                 });

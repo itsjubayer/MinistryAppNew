@@ -1,0 +1,97 @@
+﻿@model Ministry.Models.SubmittedFileVM
+
+@{
+    ViewData["Title"] = "Upload File";
+}
+
+
+<h4>Submit File</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="SubmitFile" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Report_Type_Id)
+            @Html.HiddenFor(m => m.Attachment)
+            @Html.HiddenFor(m => m.chamber_username)
+            @Html.HiddenFor(m => m.DeadLine)
+            @Html.HiddenFor(m => m.ReviewedDate)
+            @Html.HiddenFor(m => m.File_Submit_Status)
+            @Html.HiddenFor(m => m.ReSubmitDate)
+            @Html.HiddenFor(m => m.Feedback_Note)
+            @Html.HiddenFor(m => m.FeedbackDate)
+            @Html.HiddenFor(m => m.Feedback_By)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.CreateDate)
+            @Html.HiddenFor(m => m.IsActive)
+
+            @Html.HiddenFor(m => m.TypesOfReport.Id)
+            @Html.HiddenFor(m => m.TypesOfReport.IsActive)
+            @Html.HiddenFor(m => m.TypesOfReport.Remarks)
+            @Html.HiddenFor(m => m.TypesOfReport.Report_Type_Name)
+            @Html.HiddenFor(m => m.TypesOfReport.Start_Date)
+            @Html.HiddenFor(m => m.TypesOfReport.Frequency_Of_Report)
+            @Html.HiddenFor(m => m.TypesOfReport.FreqOfReport)
+            @Html.HiddenFor(m => m.TypesOfReport.AlertFrquency)
+            @Html.HiddenFor(m => m.TypesOfReport.AlertDays)
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Type</label>
+
+                    @Html.TextBoxFor(model => model.TypesOfReport.Report_Type_Name, new { @placeholder = "Type", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="DeadLine" class="control-label"></label>
+                    @Html.TextBoxFor(model => model.DeadLine, new { @placeholder = "DeadLine", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="File_Submit_Status" class="control-label"></label>
+
+                    @Html.TextBoxFor(model => model.File_Submit_Status, new { @placeholder = "Status", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+
+                    @Html.TextBoxFor(model => model.CreatedBy, new { @placeholder = "CreatedBy", @class = "cCode form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <input type="file" class="form-control" name="submitFile" />
+            </div>
+
+
+
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-primary">Submit File</button>
+
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -19,11 +19,11 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 total green">Total Submit <br> 30</div>
+            <div class="col-lg-3 total green">Total Submit <br> <a href="FileRequestList?fileStr=Submitted">@ViewBag.Submit</a> </div>
 
-            <div class="col-lg-3 total blue">Total In Progress <br> 3</div>
+            <div class="col-lg-3 total blue">Total In Progress <br><a href="FileRequestList?fileStr=Progress"> @ViewBag.Progress </a></div>
 
-            <div class="col-lg-3 total maroon">Total Pending <br> 12</div>
+            <div class="col-lg-3 total maroon">Total Pending <br> <a href="FileRequestList?fileStr=Pending"> @ViewBag.Pending</a></div>
         </div>
         <!--end list dropdown and report number -->
         <div style="height:10px;"></div>
