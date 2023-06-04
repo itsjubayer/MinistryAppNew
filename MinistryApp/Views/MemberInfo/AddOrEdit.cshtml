@@ -2,20 +2,45 @@
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = @localizer["Create"];
+    var baseurl = ViewBag.BaseUrl;
 }
+<script src="~/../lib/jquery/dist/jquery.js"></script>
 
-<h4>@localizer["General Entry"]</h4>
+
+<h4>@localizer["Add Member"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="AddOrEdit">
+        <form name="form1" asp-action="AddOrEdit" asp-controller="MemberInfo" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            @*<input type="hidden" asp-for="ChamberId" />
+        <input type="hidden" asp-for="MemberName" />
+        <input type="hidden" asp-for="Address" />
+        <input type="hidden" asp-for="Thana" />
+        <input type="hidden" asp-for="Upzila" />
+        <input type="hidden" asp-for="District" />
+        <input type="hidden" asp-for="Division" />
+        <input type="hidden" asp-for="Country" />
+        <input type="hidden" asp-for="Status" />
+        <input type="hidden" asp-for="PostalCode" />
+        <input type="hidden" asp-for="Tradelicense" />
+        <input type="hidden" asp-for="NID" />
+        <input type="hidden" asp-for="TIN" />
+        <input type="hidden" asp-for="Phone" />
+        <input type="hidden" asp-for="Alternative_Phone" />
+        <input type="hidden" asp-for="Alternative_Email" />
+        <input type="hidden" asp-for="ExpiryDate" />
+        <input type="hidden" asp-for="EntryDate" />
+        <input type="hidden" asp-for="Designation" />
+        <input type="hidden" asp-for="IsActive" />*@
 
             <div class="form-row">
                 <div class="form-group  col-md-6">
-                    cHAMBER lisT
+                    <label class="control-label"> Chamber </label>
+                    @Html.DropDownList("ChamberId", new SelectList(ViewBag.chamberList, "Value", "Text"), "Select Chamber", new { @class = "form-control" })
+
                 </div>
             </div>
 
@@ -30,128 +55,217 @@
 
             <div class="form-row">
                 <div class="form-group  col-md-6">
-                    District, Division, Thana, Upzilla
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Country" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Country" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Address" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <label asp-for="Designation" class="control-label"></label>
+                    @Html.DropDownListFor(m => m.Designation, new SelectList(ViewBag.designationList, "Value", "Text"), "Select Designation", new { @class = "inputstl" })
+                    <span asp-validation-for="Designation" class="text-danger"></span>
                 </div>
             </div>
 
 
+            <div class="form-group">
+                <label class="control-label">Division</label>
+                <select asp-for="Division" class="inputstl"
+                        asp-items="ViewBag.DivisionData"
+                        id="DivisionId" onchange="loadDivision(this)"></select>
+                <span asp-validation-for="Division" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">District</label>
+                <select asp-for="District" class="inputstl" asp-items="ViewBag.DistrictData" id="ddlDistrictId"></select>
+                <span asp-validation-for="District" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Upzila</label>
+                <select asp-for="Upzila" class="inputstl" asp-items="ViewBag.UpzilaData" id="ddlUpzailaId"></select>
+                <span asp-validation-for="Upzila" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Thana</label>
+                @*@Html.DropDownListFor(m => m.Thana, new SelectList(ViewBag.unionList, "Value", "Text"), "Select Division", new { @class = "form-control" })*@
+                <select asp-for="Thana" class="inputstl" asp-items="ViewBag.UnionData" id="ddlThanaId"></select>
+                <span asp-validation-for="Thana" class="text-danger"></span>
+            </div>
+
             <div class="form-row">
+                <div class="form-group">
+                    <label class="control-label">Expair Date</label>
+                    <input asp-for="ExpiryDate" id="datepickerExpairdate" type="text" class="form-control  inputstl" value="@DateTime.Now.ToString("MM-dd-yyyy")" />
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="Country" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="Address" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                @*<div class="form-row">
                 <div class="form-group  col-md-6">
                     <label asp-for="Status" class="control-label"></label>
                     @Html.TextBoxFor(m => m.Status, new { @class = "form-control", @maxlength = "35" })
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
-            </div>
+            </div>*@
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="PostalCode" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="PostalCode" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Tradelicense" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Tradelicense, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Tradelicense" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="Tradelicense" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.Tradelicense, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Tradelicense" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="NID" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.NID, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="NID" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="NID" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.NID, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="NID" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="TIN" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.TIN, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="TIN" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="TIN" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.TIN, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="TIN" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Phone" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Phone" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label asp-for="Phone" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Alternative_Phone" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Alternative_Phone, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Alternative_Phone" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Phone (Alternative)</label>
+                        @Html.TextBoxFor(m => m.Alternative_Phone, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Alternative_Phone" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Alternative_Email" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Alternative_Email, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Alternative_Email" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Email</label>
+                        @Html.TextBoxFor(m => m.Alternative_Email, new { @class = "form-control", @maxlength = "35" })
+                        <span asp-validation-for="Alternative_Email" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="ExpiryDate" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="EntryDate" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.EntryDate, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="EntryDate" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group  col-md-6">
-                    <label asp-for="Designaion" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.Designaion, new { @class = "form-control", @maxlength = "35" })
-                    <span asp-validation-for="Designaion" class="text-danger"></span>
-                </div>
-            </div>
 
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="submit" value="@localizer["Submit"]" class="btn btn-primary btn-block" />
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="@localizer["Submit"]" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Back to List"]</a>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Back to List"]</a>
-                </div>
-            </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepickerExpairdate").datepicker();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var a = 0;
+        });
+    function loadDivision(obj) {
+            var value = obj.value;
+            var url = "@baseurl";
+            $.post(url + "Account/GetDistrictsByDivisionId", { divisionId: value }, function (data) {
+                debugger;
+                PopulateDistrictDropDown("#ddlDistrictId", data);
+            });
+        }
+    function PopulateDistrictDropDown(dropDownId, list, selectedId) {
+            $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select District--</option>")
+            $.each(list, function (index, row) {
+                $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+            });
+    }
+
+
+    $('#ddlDistrictId').change(function () {
+        var value = $("#ddlDistrictId").val();
+            var url = "@baseurl";
+        $.post(url + "Account/GetUpaziaByDistrictId", { districtId: value }, function (data) {
+                debugger;
+            PopulateUpzilaDropDown("#ddlUpzailaId", data);
+            });
+    });
+
+    function PopulateUpzilaDropDown(dropDownId, list, selectedId) {
+        $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select Upzila--</option>")
+        $.each(list, function (index, row) {
+            $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+        });
+    }
+
+
+        $('#ddlUpzailaId').change(function () {
+            var value = $("#ddlUpzailaId").val();
+            var url = "@baseurl";
+            $.post(url + "Account/GetUnionByUpzilaId", { upzilaId: value }, function (data) {
+                debugger;
+            PopulateThanaDropDown("#ddlThanaId", data);
+            });
+    });
+
+    function PopulateThanaDropDown(dropDownId, list, selectedId) {
+        $(dropDownId).empty();
+        $(dropDownId).append("<option>--Select Thana--</option>")
+        $.each(list, function (index, row) {
+            $(dropDownId).append("<option value='" + row.id + "'>" + row.name + "</option>")
+        });
+    }
+
+
+    </script>
+
+
 }

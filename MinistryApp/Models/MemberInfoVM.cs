@@ -58,14 +58,14 @@ namespace Ministry.Models
         [DisplayName("Entry Date")]
         [Column(TypeName = "DateTime")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? EntryDate { get; set; }
+        public DateTime? EntryDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "field is required.")]
         [DisplayName("Designation")]
         [Column(TypeName = "nvarchar(20)")]
-        public string Designaion { get; set; }
+        public string Designation { get; set; }
 
         [DisplayName("Active")]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

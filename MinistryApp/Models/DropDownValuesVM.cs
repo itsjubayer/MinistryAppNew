@@ -30,11 +30,10 @@ namespace Ministry.Models
 
     public enum EnumValueType
     {
-        THANA,
-        UPZILLA,
-        DISTRICT,
-        DIVISION,
-        CHAMBER_TYPE
+        [Display(Name = "CHAMBER_TYPE")]
+        CHAMBER_TYPE,
+        [Display(Name = "DESIGNATION")]
+        DESIGNATION
     }
 
 

@@ -29,7 +29,10 @@ namespace Ministry.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SubmittedFiles.Where(e => e.IsActive == true).ToListAsync());
+            return View(await _context.SubmittedFiles
+                .Include(e => e.TypesOfReport)
+                .Where(e => e.IsActive == true)
+                .ToListAsync());
         }
 
         // GET: EnumValues/Create
@@ -66,6 +69,7 @@ namespace Ministry.Controllers
             ModelState.Clear();
             if (ModelState.IsValid)
             {
+                
                 if (valObj.Id == 0)
                 {
                     var GetChamberUserList = _context.Users
@@ -79,6 +83,7 @@ namespace Ministry.Controllers
                         //fileCreatedForChambersObj.Chamber_Id = Convert.ToInt32(valStr.Id);
 
                         fileCreatedForChambersObj.Report_Type_Id = valObj.Report_Type_Id;
+                        fileCreatedForChambersObj.TypesOfReportId = valObj.Report_Type_Id;
                         fileCreatedForChambersObj.DeadLine = valObj.DeadLine;
                         fileCreatedForChambersObj.CreatedBy = userName;
                         fileCreatedForChambersObj.File_Submit_Status = "Pending";
@@ -96,8 +101,34 @@ namespace Ministry.Controllers
             return View(valObj);
         }
 
-        // GET: Bill/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        [Authorize]
+        public IActionResult Feedback(int id = 0)
+        {
+
+            //_context.SubmittedFiles.Include(e => e.TypesOfReport).Where(e => e.Id == id && e.IsActive == true)
+            if (id == 0)
+                return View(new SubmittedFileVM());
+            else
+                return View(_context.SubmittedFiles.Find(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Feedback(SubmittedFileVM valObj)
+        {
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            valObj.File_Submit_Status = "Reviewed";
+            valObj.ReviewedDate = DateTime.Now;
+            valObj.FeedbackDate = DateTime.Now;
+            valObj.Feedback_By = userName;
+            _context.Update(valObj);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+            // GET: Bill/Delete/5
+            public async Task<IActionResult> Delete(int? id)
         {
             var valObj = await _context.SubmittedFiles.FindAsync(id);
             _context.SubmittedFiles.Remove(valObj);

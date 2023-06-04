@@ -284,7 +284,8 @@ namespace MinistryApp.Controllers
             ViewData["DistrictData"] = new SelectList(_districts.OrderBy(s => s.Id), "Id", "Name");
             ViewData["UpzilaData"] = new SelectList(_Upzila.OrderBy(s => s.Id), "Id", "Name");
             ViewData["UnionData"] = new SelectList(_Unions.OrderBy(s => s.Id), "Id", "Name");
-
+            string host = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/";
+            ViewData["BaseUrl"] = host;
 
             //var divisionListObj = (from c in _context.DivisionsList
             //                       select new SelectListItem()
@@ -329,8 +330,7 @@ namespace MinistryApp.Controllers
             ViewBag.chamberList = chamberListObj;
 
 
-            string host = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/";
-            ViewData["BaseUrl"] = host;
+            
 
 
 

@@ -374,7 +374,7 @@ namespace Ministry.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Designaion")
+                    b.Property<string>("Designation")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
@@ -476,7 +476,7 @@ namespace Ministry.Migrations
                     b.Property<DateTime>("Submission_Date")
                         .HasColumnType("DateTime");
 
-                    b.Property<int?>("TypesOfReportId")
+                    b.Property<int>("TypesOfReportId")
                         .HasColumnType("int");
 
                     b.Property<string>("chamber_username")
@@ -801,7 +801,9 @@ namespace Ministry.Migrations
                 {
                     b.HasOne("Ministry.Models.TypesOfReportVM", "TypesOfReport")
                         .WithMany()
-                        .HasForeignKey("TypesOfReportId");
+                        .HasForeignKey("TypesOfReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TypesOfReport");
                 });

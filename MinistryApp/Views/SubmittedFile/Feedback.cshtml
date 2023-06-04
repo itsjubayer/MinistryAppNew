@@ -1,0 +1,137 @@
+﻿@model Ministry.Models.SubmittedFileVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form name="form1" asp-action="Feedback" asp-controller="SubmittedFile" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Report_Type_Id)
+            @Html.HiddenFor(m => m.TypesOfReportId)
+            @Html.HiddenFor(m => m.chamber_username)
+            @Html.HiddenFor(m => m.Attachment)
+            @Html.HiddenFor(m => m.Submission_Date)
+            @Html.HiddenFor(m => m.DeadLine)
+            @Html.HiddenFor(m => m.ReviewedDate)
+            @Html.HiddenFor(m => m.File_Submit_Status)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.CreateDate)
+            @Html.HiddenFor(m => m.IsActive)
+
+            @Html.HiddenFor(m => m.Feedback_By, new { Value = "@User.Identity.Name" })
+
+            @*@Html.DropDownList("ContractVar2", new SelectList(ViewBag.contractsListSchedule, "Value", "Text"), "Select contract", new { @class = "form-control" })*@
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Report Type</label>
+                    @*@Model.TypesOfReport.Report_Type_Name*@
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Chamber</label>
+                    @Model.chamber_username
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Submission Date</label>
+                    @Model.Submission_Date
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">DeadLine</label>
+                    @Model.DeadLine
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Created On</label>
+                    @Model.CreateDate
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Created By</label>
+                    @Model.CreatedBy
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Attachment</label>
+                    @if (Model.Attachment != null && Model.Attachment != "")
+                    {
+                        try
+                        {
+                            <div class="col-md-6" id="fileExist">
+                                @*@Html.LabelFor(model => Model.Attachment, new { @class = "FileUpload" })*@
+                                @Html.HiddenFor(model => Model.Attachment)
+                                <div class="col-md-6">
+                                    <a class="" target="_blank" href="~/Files/@Model.Attachment">
+                                        <img class="attachment" src="~/../assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        catch
+                        {
+                            <span>File exists but Not Found...</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>File Not Found...</span>
+                    }
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="Feedback_Note" class="control-label"></label>
+                    @Html.TextArea("Feedback_Note", null, new { @placeholder = "Feedback Note", @class = "form-control" })
+                    <span asp-validation-for="Feedback_Note" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" /> @*onclick="phonenumber(document.form1.Mobile)"*@
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+}

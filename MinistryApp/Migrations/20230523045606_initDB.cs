@@ -30,10 +30,10 @@ namespace Ministry.Migrations
                     ChamberName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TypesOfChambers = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ChamberNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Thana = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Upzila = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Division = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Thana = table.Column<int>(type: "int", nullable: false),
+                    Upzila = table.Column<int>(type: "int", nullable: false),
+                    District = table.Column<int>(type: "int", nullable: false),
+                    Division = table.Column<int>(type: "int", nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicenseNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicenseIssuedate = table.Column<DateTime>(type: "DateTime", nullable: false),
@@ -43,7 +43,7 @@ namespace Ministry.Migrations
                     LicenseAttachment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     NID = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     ETIN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DOB = table.Column<DateTime>(type: "DateTime", nullable: false),
@@ -141,6 +141,38 @@ namespace Ministry.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MemberInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChamberId = table.Column<int>(type: "int", nullable: false),
+                    MemberName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    Thana = table.Column<int>(type: "int", nullable: false),
+                    Upzila = table.Column<int>(type: "int", nullable: false),
+                    District = table.Column<int>(type: "int", nullable: false),
+                    Division = table.Column<int>(type: "int", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tradelicense = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TIN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Alternative_Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Alternative_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "DateTime", nullable: true),
+                    EntryDate = table.Column<DateTime>(type: "DateTime", nullable: true),
+                    Designation = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MemberInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tblFAQ",
                 columns: table => new
                 {
@@ -150,11 +182,31 @@ namespace Ministry.Migrations
                     FaqDescription = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     EntryBy = table.Column<string>(type: "nvarchar(25)", nullable: true),
                     Date = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    ApartCodeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tblFAQ", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TypesOfReports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Report_Type_Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Frequency_Of_Report = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Start_Date = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    AlertDays = table.Column<int>(type: "int", nullable: false),
+                    AlertFrquency = table.Column<int>(type: "int", nullable: false),
+                    Remarks = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    FreqOfReport = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypesOfReports", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -327,6 +379,40 @@ namespace Ministry.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SubmittedFiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Chamber_Id = table.Column<int>(type: "int", nullable: false),
+                    Report_Type_Id = table.Column<int>(type: "int", nullable: false),
+                    TypesOfReportId = table.Column<int>(type: "int", nullable: false),
+                    chamber_username = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    Attachment = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    Submission_Date = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    DeadLine = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    ReviewedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    File_Submit_Status = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    ReSubmitDate = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    Feedback_Note = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    FeedbackDate = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    Feedback_By = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubmittedFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubmittedFiles_TypesOfReports_TypesOfReportId",
+                        column: x => x.TypesOfReportId,
+                        principalTable: "TypesOfReports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -367,6 +453,11 @@ namespace Ministry.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SubmittedFiles_TypesOfReportId",
+                table: "SubmittedFiles",
+                column: "TypesOfReportId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tblFiles_application_usersId",
                 table: "tblFiles",
                 column: "application_usersId");
@@ -402,6 +493,12 @@ namespace Ministry.Migrations
                 name: "FileCategoryList");
 
             migrationBuilder.DropTable(
+                name: "MemberInfo");
+
+            migrationBuilder.DropTable(
+                name: "SubmittedFiles");
+
+            migrationBuilder.DropTable(
                 name: "tblFAQ");
 
             migrationBuilder.DropTable(
@@ -415,6 +512,9 @@ namespace Ministry.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "TypesOfReports");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -83,10 +83,7 @@ namespace Ministry.Controllers
             {
                 if (submitFileObj.Id == 0)
                 {
-
-
                     _context.Add(submitFileObj);
-
                 }
                 else
                 {

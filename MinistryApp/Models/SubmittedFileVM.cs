@@ -17,6 +17,8 @@ namespace Ministry.Models
         public int Chamber_Id { get; set; } = 0;
         //public virtual ApplicationUser ChamberPerson { get; set; }
         public int Report_Type_Id { get; set; }
+
+        public int TypesOfReportId { get; set; }        
         public virtual TypesOfReportVM TypesOfReport { get; set; }
 
         [DisplayName("Chamber")]
@@ -76,7 +78,7 @@ namespace Ministry.Models
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         [DisplayName("Active")]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
 
     }

@@ -24,6 +24,9 @@
                         Status
                     </th>
                     <th>
+                        Download
+                    </th>
+                    <th>
                         <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i>@localizer["Create New"]</a>
                     </th>
                 </tr>
@@ -32,22 +35,59 @@
                 @{ int rowNo = 0; }
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@{rowNo++;} @rowNo</td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TypesOfReport.Report_Type_Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Submission_Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.File_Submit_Status)
-                        </td>
-                        <td>
-                            <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@{rowNo++;} @rowNo</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypesOfReport.Report_Type_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Submission_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.File_Submit_Status)
+                    </td>
+                    <td>
+                        @if (item.Attachment != null && item.Attachment != "")
+                        {
+                            try
+                            {
+                                <div class="col-md-6" id="fileExist">
+                                    @*@Html.LabelFor(model => item.Attachment, new { @class = "FileUpload" })*@
+                                    @Html.HiddenFor(model => item.Attachment)
+                                    <div class="col-md-6">
+                                        <a class="" target="_blank" href="~/Files/@item.Attachment">
+                                            <img class="attachment" src="~/../assets/icons/files.png" width="30" alt="File" title="File" accept="application/pdf, application/vnd.ms-excel" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                            }
+                            catch
+                            {
+                                <span>File exists but Not Found...</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>File Not Found...</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.File_Submit_Status == "Submitted")
+                        {
+                            <a asp-action="Feedback" asp-route-id="@item.Id">Feedback</a>
+                        }
+                        else if (item.File_Submit_Status == "Reviewed")
+                        {
+                            @*<a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a>*@
+                        }else
+                        {
+                        <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a>
+                        }
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

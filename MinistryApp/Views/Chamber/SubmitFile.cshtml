@@ -12,6 +12,7 @@
         <form asp-action="SubmitFile" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.TypesOfReportId)
             @Html.HiddenFor(m => m.Report_Type_Id)
             @Html.HiddenFor(m => m.Attachment)
             @Html.HiddenFor(m => m.chamber_username)
@@ -81,12 +82,10 @@
 
             <div class="form-row">
 
+                <button type="submit" class="btn btn-primary">Submit File</button>
 
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary">Submit File</button>
+                <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
 
-                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>Back to List</a>
-                </div>
             </div>
         </form>
     </div>
