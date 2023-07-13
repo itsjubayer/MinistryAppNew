@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Ministry.Models.GalleryVM>
+
+
+<section class="image-grid">
+    <div class="container-xxl">
+        
+        <div class="row gy-4">
+            @foreach (var item in Model)
+            { 
+
+        
+            <div class="col-12 col-sm-6 col-md-4">
+                <figure>
+                    <a class="d-block" href="">
+                            <img width="1920" height="1280" src="../assets/gallery/@item.ImageName" class="img-fluid" alt="@item.Title" data-caption="@item.Title" loading="lazy">
+                    </a>
+                </figure>
+            </div>
+
+            }
+        </div>
+    </div>
+</section>

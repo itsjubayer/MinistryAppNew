@@ -42,6 +42,10 @@ namespace MinistryApp.Models
         public DbSet<TypesOfReportVM> TypesOfReports { get; set; }
         public DbSet<SubmittedFileVM> SubmittedFiles { get; set; }
         public DbSet<MemberInfoVM> MemberInfoList { get; set; }
+        public DbSet<GalleryVM> GalleryList { get; set; }
+        public DbSet<ELearningVM> ELearningList { get; set; }
+        public DbSet<JobVM> JobList { get; set; }
+        public DbSet<NewsEventsVM> NewsEventList { get; set; }
 
         
 

@@ -45,10 +45,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\img\news\job3.webp" />
+    <None Include="wwwroot\assets\img\news\jute.webp" />
+    <None Include="wwwroot\assets\img\sample.pdf" />
     <None Include="wwwroot\assets\img\slider\padma.webp" />
     <None Include="wwwroot\assets\js\main.js" />
     <None Include="wwwroot\assets\js\sidebar.js" />
     <None Include="wwwroot\assets\js\_main.js" />
+    <None Include="wwwroot\assets\news\job3.webp" />
+    <None Include="wwwroot\assets\news\jute.webp" />
+    <None Include="wwwroot\assets\sample.pdf" />
+    <None Include="wwwroot\assets\slider\padma.webp" />
     <None Include="wwwroot\assets\vendor\aos\aos.js" />
     <None Include="wwwroot\assets\vendor\bootstrap-icons\bootstrap-icons.scss" />
     <None Include="wwwroot\assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />

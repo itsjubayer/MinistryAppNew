@@ -29,14 +29,7 @@ namespace MinistryApp.Controllers
             return View(await _context.Faqs.ToListAsync());
         }
 
-        // GET: Flat/Create
-        public IActionResult AddOrEdit(int id = 0)
-        {
-            if (id == 0)
-                return View(new FAQVM());
-            else
-                return View(_context.Faqs.Find(id));
-        }
+        
 
 
         // GET: Flat
@@ -45,16 +38,25 @@ namespace MinistryApp.Controllers
             return View(await _context.Faqs.ToListAsync());
         }
 
-
+        // GET: Flat/Create
+        public IActionResult AddOrEdit(int id = 0)
+        {
+            
+            if (id == 0)
+                return View(new FAQVM());
+            else
+                return View(_context.Faqs.Find(id));
+        }
 
         // POST: Employee/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("Id,FaqTitle,FaqDescription,EntryBy")] FAQVM faqVM)
+        public async Task<IActionResult> AddOrEdit(FAQVM faqVM)
         {
             faqVM.Date = DateTime.Now;
+            faqVM.EntryBy = User.Identity.Name!=""? User.Identity.Name:"-" ;
             if (ModelState.IsValid)
             {
                 if (faqVM.Id == 0)

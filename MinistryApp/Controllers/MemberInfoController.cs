@@ -105,6 +105,8 @@ namespace Ministry.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(MemberInfoVM valObj)
         {
+            valObj.ChamberId = User.Identity.Name;
+            //valObj.ChamberId = userName;
             valObj.Status = "Active";
             ModelState.Clear();
             if (ModelState.IsValid)

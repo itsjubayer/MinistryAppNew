@@ -32,7 +32,7 @@ namespace Ministry.Models
         [Required(ErrorMessage = "This field is required.")]
         public int AlertDays { get; set; } = 0;
 
-        [DisplayName("Alert Frquency")]
+        [DisplayName("Alert Frequency")]
         [Required(ErrorMessage = "This field is required.")]
         public int AlertFrquency { get; set; } = 0;
 

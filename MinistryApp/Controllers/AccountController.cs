@@ -259,6 +259,8 @@ namespace MinistryApp.Controllers
                 Id = 0,
                 Name = "--Select Division--"
             });
+
+
             var _districts = new List<DistrictsVM>();
             _districts.Add(new DistrictsVM()
             {

@@ -1,16 +1,16 @@
 ﻿<ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a asp-action="Index" asp-controller="Chamber" class="nav-link active" aria-current="page">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
             Dashboard
         </a>
     </li>
-    <li>
+    @*<li>
         <a asp-action="Index" asp-controller="FileCategory" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
             Category
         </a>
-    </li>
+    </li>*@
 
     <li>
         <a href="#" class="nav-link link-dark">
@@ -18,12 +18,12 @@
             Mamla Mokoddoma
         </a>
     </li>
-    <li>
+    @*<li>
         <a asp-action="ListFilesRows" asp-controller="FileModel" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
             Files
         </a>
-    </li>
+    </li>*@
 
     <li>
         <a asp-action="Index" asp-controller="MemberInfo" class="nav-link link-dark">

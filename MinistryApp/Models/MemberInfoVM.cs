@@ -13,7 +13,7 @@ namespace Ministry.Models
     {
         [Key]
         public int Id { get; set; }
-        public int ChamberId { get; set; }
+        public string ChamberId { get; set; }
         
         [Column(TypeName = "nvarchar(50)")]
         public string MemberName { get; set; }

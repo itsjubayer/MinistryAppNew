@@ -19,27 +19,27 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link href="../assets/img/logo.png" rel="icon">
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../../assets/img/logo.png" rel="icon">
+    <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-    <!-- <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+    <!-- <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
         .row.content {
@@ -76,12 +76,11 @@
 
 
 <body>
-
     <!-- ======= Top Bar ======= -->
     <section id="topbar" class="d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <h4> <a href="index.html" class="logo"><img src="../assets/img/logo.png" alt="Ministry Of Commerce"></a> Ministry of Commerce</h4>
+                <h4> <a href="index.html" class="logo"><img src="../../assets/img/logo.png" alt="Ministry Of Commerce"></a> Ministry of Commerce</h4>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
                 <p>
@@ -129,15 +128,25 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+                    @*<li><a class="nav-link scrollto active" href="index.html">Home</a></li>
                     <li>
                         <a class="nav-link scrollto" asp-area="" asp-controller="About" asp-action="About">@localizer["About"]</a>
+                    </li>*@
+                    <li><a class="nav-link scrollto" asp-controller="NewsEvent" asp-action="index"><span>News & Events</span></a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Job" asp-action="index"><span>Jobs</span></a></li>
+                    <li><a class="nav-link scrollto" asp-controller="ELearning" asp-action="index"><span>E-Learning</span></a></li>
+                    <li>
+                        <a class="nav-link scrollto" asp-controller="Gallery" asp-action="index"><span>Gallery</span></a>
                     </li>
-                    <li><a class="nav-link scrollto" href="news.html">News & Events</a></li>
-                    <li><a class="nav-link scrollto" href="jobs.html">Jobs</a></li>
-                    <li><a class="nav-link scrollto" href="elearning.html">E-learning</a></li>
-                    <li><a class="nav-link scrollto" href="photo-gallery.html">Gallery</a></li>
-                    <li><a class="nav-link scrollto" href="faq.html">FAQ</a></li>
+
+                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
+                    {
+                        <li>
+                            <a class="nav-link scrollto" asp-controller="FAQ" asp-action="index"><span>FAQ</span></a>
+                        </li>
+                    }
+
+
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     @*<li><a class="nav-link scrollto" href="dashboard1.html">Dashboard</a></li>*@
 
@@ -156,16 +165,7 @@
                     }
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
-                    </li>
+                    
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -185,7 +185,6 @@
 
             <div class="col-sm-9">
                 @RenderBody()
-
             </div>
         </div>
     </div>
@@ -215,23 +214,23 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="../assets/js/main.js"></script>
+    <script src="../../assets/js/main.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

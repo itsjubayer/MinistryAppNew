@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Ministry.Models.NewsEventsVM>
+
+<section class="inner-page">
+    <div class="container">
+        @for(int i=0;i<= 2; i++)
+        {
+            <div class="row">
+            @foreach (var item in Model)
+            { 
+                
+                
+            <div class="col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="../assets/news_image/@item.ImageName" alt="news">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.NewsTitle</h5>
+                        <p class="card-text">@item.NewsDescription</p>
+                        <a href="news-detail.html" class="btn btn-primary">Read more...</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+                    @if (i == 2)
+                        break;
+                }
+            </div>
+            break;
+        }
+    </div>
+</section>

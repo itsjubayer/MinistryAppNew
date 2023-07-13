@@ -238,6 +238,41 @@ namespace Ministry.Migrations
                     b.ToTable("DropdownValues");
                 });
 
+            modelBuilder.Entity("Ministry.Models.ELearningVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(550)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LanguageType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("VDOUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ELearningList");
+                });
+
             modelBuilder.Entity("Ministry.Models.FAQVM", b =>
                 {
                     b.Property<int>("Id")
@@ -249,14 +284,14 @@ namespace Ministry.Migrations
                         .HasColumnType("DateTime");
 
                     b.Property<string>("EntryBy")
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("FaqDescription")
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(550)");
 
                     b.Property<string>("FaqTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -352,6 +387,67 @@ namespace Ministry.Migrations
                     b.ToTable("tblFiles");
                 });
 
+            modelBuilder.Entity("Ministry.Models.GalleryVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(550)");
+
+                    b.Property<string>("EntryBy")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(550)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GalleryList");
+                });
+
+            modelBuilder.Entity("Ministry.Models.JobVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JobDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(550)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobList");
+                });
+
             modelBuilder.Entity("Ministry.Models.MemberInfoVM", b =>
                 {
                     b.Property<int>("Id")
@@ -368,8 +464,8 @@ namespace Ministry.Migrations
                     b.Property<string>("Alternative_Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ChamberId")
-                        .HasColumnType("int");
+                    b.Property<string>("ChamberId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -424,6 +520,39 @@ namespace Ministry.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MemberInfo");
+                });
+
+            modelBuilder.Entity("Ministry.Models.NewsEventsVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LanguageType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NewsDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(550)");
+
+                    b.Property<string>("NewsTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("PublishDate")
+                        .HasColumnType("DateTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsEventList");
                 });
 
             modelBuilder.Entity("Ministry.Models.SubmittedFileVM", b =>

@@ -60,17 +60,17 @@ namespace MinistryApp.ViewModel
         /// </summary>
 
 
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         [DisplayName("First Name *")]
         [Column(TypeName = "nvarchar(25)")]
         [Required(ErrorMessage = "First Name field is required.")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [DisplayName("Last Name *")]
         [Column(TypeName = "nvarchar(25)")]
         [Required(ErrorMessage = "Last Name field is required.")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
 
 
@@ -82,13 +82,13 @@ namespace MinistryApp.ViewModel
         [MaxLength(20)]
         [MinLength(1)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number is not valid")]
-        public string Mobile { get; set; }
+        public string Mobile { get; set; } = string.Empty;
         [DisplayName("DOB")]
         [Column(TypeName = "DateTime")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DOB { get; set; }
+        public DateTime DOB { get; set; } = DateTime.Now;
 
-        
+
         //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         //[RegularExpression(@"^(\d{13})$", ErrorMessage = "NID is not Valid")]
         [Required(ErrorMessage = "You must provide a NID")]
@@ -96,36 +96,36 @@ namespace MinistryApp.ViewModel
         [MaxLength(20)]
         [MinLength(1)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "NID is not valid")]
-        public string NID { get; set; }
+        public string NID { get; set; } = string.Empty;
 
         [DisplayName("E-TIN")]
         [Column(TypeName = "nvarchar(25)")]
-        public string ETIN { get; set; }
+        public string ETIN { get; set; } = string.Empty;
 
         [DisplayName("Passport")]
         [Column(TypeName = "nvarchar(25)")]
-        public string PassportNo { get; set; }
+        public string PassportNo { get; set; } = string.Empty;
         [DisplayName("Per-Address")]
         [Column(TypeName = "nvarchar(250)")]
-        public string Per_Address { get; set; }
+        public string Per_Address { get; set; } = string.Empty;
 
         [DisplayName("Pre-Address")]
         [Column(TypeName = "nvarchar(250)")]
-        public string pre_Address { get; set; }
+        public string pre_Address { get; set; } = string.Empty;
 
-        
+
         [DisplayName("User Role")]
         [Column(TypeName = "nvarchar(250)")]
-        public string UserRole { get; set; }
+        public string UserRole { get; set; } = string.Empty;
 
-        
 
-        
-        public bool IsActive { get; set; }
+
+
+        public bool IsActive { get; set; } = true;
         
         [DisplayName("Attachment")]
         [Column(TypeName = "nvarchar(55)")]
-        public string Attachment { get; set; }
+        public string Attachment { get; set; } = string.Empty;
 
         [DisplayName("Image")]
         [Column(TypeName = "nvarchar(150)")]

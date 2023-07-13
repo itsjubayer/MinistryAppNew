@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Ministry.Models.ELearningVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Elearning List</h4>
+<hr />
+<div class="form-group col-md-6">
+    <a asp-action="Index" asp-controller="ELearning" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>E-Learning</a>
+</div>
+
+
+<br />
+<table class="table table-hover" id="datatable">
+    <thead>
+        <tr style="background-color: #f7ecfd">
+            <th>
+                Sl.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LanguageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VDOUrl)
+            </th>
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa fa-plus-square"></i>Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int rowNo = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@{
+                        rowNo++;
+                    } @rowNo</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LanguageType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VDOUrl)
+                </td>
+                <td>                
+                    <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts
+    {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#datatable").DataTable();
+        }
+        )
+    </script>
+}

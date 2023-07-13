@@ -12,29 +12,29 @@ namespace Ministry.Models
     public class FAQVM
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } = 0;
 
         [DisplayName("FAQ Title")]
         [Required(ErrorMessage = "This field is required.")]
-        [Column(TypeName = "nvarchar(50)")]
-        public string FaqTitle { get; set; }
+        [Column(TypeName = "nvarchar(250)")]
+        public string FaqTitle { get; set; }=string.Empty;
 
         [DisplayName("Description")]
-        [Column(TypeName = "nvarchar(250)")]
-        public string FaqDescription { get; set; }
+        [Column(TypeName = "nvarchar(550)")]
+        public string FaqDescription { get; set; } = string.Empty;
 
-        [Column(TypeName = "nvarchar(25)")]
-        public string EntryBy { get; set; }
+        [Column(TypeName = "nvarchar(250)")]
+        public string EntryBy { get; set; } = string.Empty;
 
         [DisplayName("Date")]
         [Column(TypeName = "DateTime")]
         [Required(ErrorMessage = "This field is required.")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
 
         [DisplayName("Active")]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
     }
 }

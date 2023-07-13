@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Ministry.Models.JobVM>
+
+
+<section class="inner-page">
+    <div class="container">
+
+
+         @for(int i=0;i<= 2; i++)
+        {
+            <div class="row">
+            @foreach (var item in Model)
+            { 
+            <div class="col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="../assets/job_image/@item.ImageName" alt="jobs">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.JobTitle</h5>
+                        <p class="card-text">@item.JobDescription</p>
+                        <a href="detail-page.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+                    @if (i == 2)
+                        break;
+            }
+        </div>
+        break;
+        }
+
+    </div>
+</section>

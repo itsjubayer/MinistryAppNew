@@ -4,7 +4,24 @@
     ViewData["Title"] = @localizer["Create"];
     var baseurl = ViewBag.BaseUrl;
 }
-<script src="~/../lib/jquery/dist/jquery.js"></script>
+<script src="../../lib/jquery/dist/jquery.js"></script>
+
+    <style>
+        .inputstl {
+        padding: 9px;
+        border: solid 1px #0077B0;
+        outline: 0;
+        background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF));
+        background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px);
+        box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+    }
+
+    </style>
+
+
+
 
 
 <h4>@localizer["Add Member"]</h4>
@@ -36,13 +53,18 @@
         <input type="hidden" asp-for="Designation" />
         <input type="hidden" asp-for="IsActive" />*@
 
-            <div class="form-row">
+           @* <div class="form-row">
                 <div class="form-group  col-md-6">
                     <label class="control-label"> Chamber </label>
                     @Html.DropDownList("ChamberId", new SelectList(ViewBag.chamberList, "Value", "Text"), "Select Chamber", new { @class = "form-control" })
 
                 </div>
-            </div>
+            </div>*@
+
+            @*<div class="form-group">
+                <label>Chamber</label>
+                @Html.DropDownListFor(m => m.ChamberId, new SelectList(ViewBag.chamberList, "Value", "Text"), "Select Chamber", new { @class = "inputstl" })
+            </div>*@
 
 
             <div class="form-row">
@@ -186,10 +208,10 @@
 
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <input type="submit" value="@localizer["Submit"]" class="btn btn-primary btn-block" />
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i>@localizer["Back to List"]</a>
                     </div>
                 </div>
